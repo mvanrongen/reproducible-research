@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Martin van Rongen" />
+
+
+<title>GitHub</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link rel="shortcut icon" href="favicon/favicon.ico">
+<link rel="icon" sizes="16x16 32x32 64x64" href="favicon/favicon.ico">
+<link rel="icon" type="image/png" sizes="196x196" href="favicon/favicon-192.png">
+<link rel="icon" type="image/png" sizes="160x160" href="favicon/favicon-160.png">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96.png">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon/favicon-64.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16.png">
+<link rel="apple-touch-icon" href="favicon/favicon-57.png">
+<link rel="apple-touch-icon" sizes="114x114" href="favicon/favicon-114.png">
+<link rel="apple-touch-icon" sizes="72x72" href="favicon/favicon-72.png">
+<link rel="apple-touch-icon" sizes="144x144" href="favicon/favicon-144.png">
+<link rel="apple-touch-icon" sizes="60x60" href="favicon/favicon-60.png">
+<link rel="apple-touch-icon" sizes="120x120" href="favicon/favicon-120.png">
+<link rel="apple-touch-icon" sizes="76x76" href="favicon/favicon-76.png">
+<link rel="apple-touch-icon" sizes="152x152" href="favicon/favicon-152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/favicon-180.png">
+<meta name="msapplication-TileColor" content="#FFFFFF">
+<meta name="msapplication-TileImage" content="favicon/favicon-144.png">
+<meta name="msapplication-config" content="favicon/browserconfig.xml">
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script>
+  $( function() {
+  $( ".accordion" ).accordion({
+      heightStyle: "content",
+      active: false,
+      collapsible: true
+    });
+  } );
+</script>
+
+<script>
+  <!-- search menu pop-up --->
+  $(function() {
+    function slideToggle() {
+      $("#search-box").toggle("slide", 500);
+  };
+  $("#search-icon").on("click", function() {
+  slideToggle();
+  });
+  });
+</script>
+
+
+
+<!-- Motomo analytics -->
+
+
+<script>
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+
+
+<!-- add  Algolia DocSearch -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://carpentries.matomo.cloud/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='https://cdn.matomo.cloud/carpentries.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="index.html">Home</a>
+        </li>
+        <li>
+          <a href="01-organisation_and_availability.html">Data organisation and availability</a>
+        </li>
+        <li>
+          <a href="02-rmarkdown.html">RMarkdown</a>
+        </li>
+        <li>
+          <a href="03-version_control_github.html">Version control and GitHub</a>
+        </li>
+        <li>
+          <a href="04-github.html">GitHub and RStudio</a>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">GitHub</h1>
+<h4 class="author">Martin van Rongen</h4>
+
+</div>
+
+
+<p><br />
+</p>
+<div id="using-github-from-rstudio" class="section level2">
+<h2>Using GitHub from RStudio</h2>
+<p>Although you can do more or less all the version control aspects via the GitHub website, this is not very convenient when you are working on your R projects. Now you have an idea of how the GitHub workflow works, we can start to integrate these version control concepts with RStudio.</p>
+<p><br />
+</p>
+<div id="linking-git-and-rstudio" class="section level3">
+<h3>Linking Git and RStudio</h3>
+<p>To use Git from within RStudio you need to make sure that Git can be found by RStudio.</p>
+<p>If you haven’t done so already, make sure to go to: <code>Tools</code> &gt; <code>Global Options</code> &gt; <code>Git/SVN</code> and check that ’Enable version control interface for RStudio projects` is enabled. Also, check that the path to Git is present and correct.</p>
+<p><img src="img/git_options_rstudio.png" width="592" /></p>
+<p>You also need to inform Git of your name and e-mail address so that it can label the commits with these details. To do this, go to <code>Tools</code> &gt; <code>Shell</code> and provide the following details:</p>
+<pre><code>git config --global user.name &quot;yourGitHubUsername&quot;
+git config --global user.email &quot;name@provider.com&quot;</code></pre>
+<p>You can verify that these are set up properly by running <code>git config --global --list</code> in the shell.</p>
+<p><br />
+</p>
+</div>
+<div id="starting-a-new-project-under-git-control" class="section level3">
+<h3>Starting a new project under Git control</h3>
+<p>If you want version control of your R project, you need to make sure that the project is under control of Git.</p>
+<p>The easiest way to start this is by creating a <strong>new project</strong> that is <strong>linked to an existing GitHub repository</strong>.</p>
+<p>We can link a new project to the GitHub repository that we generated previously. To do this, we need to copy the URL for this repository. To do this, you have to go to the repository page and click on the <code>Clone or download</code> button. You can then copy the URL as shown below:</p>
+<p><img src="img/git_rstudio_01.png" width="794" /></p>
+<p>Next, we need to create a new project. Go to <code>File</code> &gt; <code>New Project</code> &gt; <code>Version Control</code> &gt; <code>Git</code>.</p>
+<p><img src="img/git_rstudio_02.png" width="564" /></p>
+<p><img src="img/git_rstudio_03.png" width="567" /></p>
+<p>In <code>Repository URL</code> paste the link to your GitHub repository. Give the project a name (avoid spaces and try to use a meaningful name) and tell RStudio where to save it. It is useful to tick the <code>Open in a new session</code> box, so that your project opens in a new RStudio session. That way RStudio opens a session with a clean environment.</p>
+<p><img src="img/git_rstudio_04.png" width="564" /></p>
+<p>Your project will open and your RStudio session should now have an extra tab in the top right corner (where your Environment is), named <code>Git</code>. This is where all the changes will show up as you work on your project.</p>
+<p><img src="img/git_rstudio_05.png" width="1392" /></p>
+<p>These options can also be found by using the <img src="img/git_toolbar_button.png" width="38" /> button in the toolbar. When you have opened a file and look at the options under this button it also enables you to find differences from the last commit (if there are any) or view the commit history of that file.</p>
+<p><img src="img/git_rstudio_06.png" width="1392" /></p>
+<p><br />
+</p>
+</div>
+<div id="changes-and-your-remote-repository" class="section level3">
+<h3>Changes and your remote repository</h3>
+<p>Let’s make some changes to our local repository, which is now under Git control. Here we are first creating a folder called <code>notebooks</code> and adding an R Markdown file named <code>01_import_and_clean_data.Rmd</code>.</p>
+<p>Once you have created the file you’ll see the folder appearing in the <code>Git</code> tab. When you tick the <code>Staged</code> box, the <code>Status</code> changes to Added. This means that Git is tracking your file and will include it in the next commit.</p>
+<p><img src="img/git_rstudio_untracked_changes.png" width="425" /></p>
+<p><img src="img/git_rstudio_tracked_changes.png" width="428" /></p>
+<p>There are a few other icons that can appear in the Git pane, so here is an overview:</p>
+<ul>
+<li><img src="img/rstudio_untracked_button.png" width="15" /> , <strong>untracked</strong> file. Git has not seen this before and it needs to be added before changes are tracked.</li>
+<li><img src="img/rstudio_added_button.png" width="16" /> , <strong>added</strong> file. The file is now tracked by Git.</li>
+<li><img src="img/rstudio_modified_button.png" width="15" /> , <strong>modified</strong> file. The file has been modified since the last commit.</li>
+<li><img src="img/rstudio_deleted_button.png" width="16" /> , <strong>deleted</strong> file. The file has been deleted since the last commit.</li>
+</ul>
+<p>When we edit the file a bit we can see how it changed by clicking on the <code>Diff</code> button in the <code>Git</code> toolbar.</p>
+<p><img src="img/git_rstudio_diff.png" width="1112" /></p>
+<p>If we are happy with the changes then we can commit them. You can do this by pressing the <code>Commit</code> button in the <code>Git</code> tab and adding a commit message. All the files that are staged will be included in that particular commit. If there are files that you do not want to commit yet then you can untick them before pressing the <code>Commit</code> button.</p>
+<p><img src="img/git_rstudio_commit.png" width="637" /></p>
+<p>To ensure that the changes end up on your remote repository you need to <strong>push</strong> the changes. To do this, press the <code>Push</code> button in the top right corner. RStudio will give you a message that the changes are pushed:</p>
+<p><img src="img/git_rstudio_push.png" width="635" /></p>
+<p><br />
+</p>
+<blockquote>
+<h3 id="challenge-1---version-control-in-rstudio">Challenge 1 - Version control in RStudio</h3>
+<ol style="list-style-type: decimal">
+<li>Create a new repository on GitHub</li>
+<li>Create a new R Project under version control</li>
+<li>Link the R Project with the remote repository</li>
+</ol>
+</blockquote>
+<p><br />
+</p>
+<blockquote>
+<h3 id="challenge-2---branching-and-changes">Challenge 2 - Branching and changes</h3>
+<ol style="list-style-type: decimal">
+<li>Create a new branch (e.g. <code>new_notebook</code>) from within RStudio. To do this, use the following button in the <code>Git</code> pane: <img src="img/new_branch_button.png" width="95" /></li>
+<li>Create a <code>notebooks</code> folder and save a new R Markdown file in it.</li>
+<li>Ensure that changes to the new file are tracked.</li>
+<li>Make some changes to the file and commit them.</li>
+<li>Push the changes to the remote repository.</li>
+</ol>
+</blockquote>
+<p><br />
+</p>
+<blockquote>
+<h3 id="challenge-3---pull-requests">Challenge 3 - Pull requests</h3>
+<ol style="list-style-type: decimal">
+<li>Go to your GitHub repository and navigate to the newly created branch</li>
+<li>Create a pull request</li>
+<li>Merge the pull request with the <code>master</code> branch</li>
+<li>Congratulate yourself on being a version control Pro!</li>
+</ol>
+</blockquote>
+<p><br />
+</p>
+</div>
+</div>
+<div id="forking-projects" class="section level2">
+<h2>Forking projects</h2>
+<p>So far we have used repositories that we created ourselves. But you might find that you want to add to somebody else’s project. Or you like their project and want to adapt it to your needs. In that case you need to make a personal copy of that project. This is called <strong>forking</strong>.</p>
+<p>To fork a repository you need to navigate to the repository page on the maintainer’s GitHub account whilst logged into your own account. You then click on the <code>fork</code> button. The repository is then copied to your account:</p>
+<p><img src="img/forking_01.png" width="818" /></p>
+<p><img src="img/forking_02.png" width="578" /></p>
+<p>The forked repository will show up in your repository list. It will specify that it is a forked repository:</p>
+<p><img src="img/forking_03.png" width="373" /></p>
+<p>Once you have forked a repository to your GitHub account you can make changes to it. Good practice is to create a <strong>new branch</strong> in your copy of the repository, so that you do not run the risk of confusing the <code>master</code> branch of your copy with the <code>master</code> branch of the original repository.</p>
+<p>In this case we’re adding a new branch called <code>new_feature</code>.</p>
+<p>After you have created a new branch on your forked copy you can start editing/adding as you like. You do this as you have done before, by <strong>staging</strong> and <strong>committing</strong> changes to your repository.</p>
+<p>When you want to suggest incorporating some of these changes into the original repository you will have to open a <strong>pull request</strong>. This works in the same way is described in the <a href="#pull-requests">pull requests</a> section, but instead of comparing two branches on the same repository, you are comparing the branch on your forked copy with the <code>master</code> branch of the original repository.</p>
+<p>Your pull request will show up in the original repository. Note that you can also see that the original repository has been forked:</p>
+<p><img src="img/forking_04.png" width="1021" /></p>
+<p><br />
+</p>
+</div>
+<div id="creating-issues" class="section level2">
+<h2>Creating issues</h2>
+<p>GitHub keeps track of bugs, improvements and tasks through <strong>Issues</strong>. The good thing about issues is that they can be shared and discussed with collaborators, in a similar way as to how the pull request system works.</p>
+<p>An issue is created from the <code>Issues</code> tab in the repository:</p>
+<p><img src="img/issues_01.png" width="806" /></p>
+<p>A new issue requires a title and description. It’s good to try and be as concise and complete as possible so that the developer knows what it is that you want. You can label the issue - in this case it is an Enhancement, but there is a whole range of labels you can choose from. Labelling can be particularly helpful when there are many issues and it helps you organise and prioritise your work.</p>
+<p><img src="img/issues_02.png" width="827" /></p>
+<p>Issues are always assigned a unique ID, which you can use to refer to them in comments:</p>
+<p><img src="img/issues_03.png" width="819" /></p>
+<p><img src="img/issues_04.png" width="808" /></p>
+<p><br />
+</p>
+</div>
+<div id="managing-access" class="section level2">
+<h2>Managing access</h2>
+<p>When you have a public repository everyone can fork the repository and make changes to that (forked) copy. You can also invite people to collaborate on your project.</p>
+<p>In order to do that you need to go to the <code>Settings</code> &gt; <code>Manage access</code> page:</p>
+<p><img src="img/manage_access.png" width="814" /></p>
+<p>Here you can invite collaborators and once they have accepted, then can open pull requests and make changes to the repository.</p>
+<p>To find repositories where you are a collaborator on you need to go to <code>Settings</code> &gt; <code>Repositories</code>. Unfortunately these repositories do not show up on your own Repositories tab.</p>
+<p><img src="img/manage_collaborative_repo.png" width="1276" /></p>
+<p><br />
+</p>
+</div>
+<div id="challenges" class="section level2">
+<h2>Challenges</h2>
+<p>Below are several challenges that incorporate some of the topics that we have covered throughout the course.</p>
+<p>To practice collaboration we are teaming up. For these challenges we will work in pairs. Both people will create a repository which contains their GitHub username in the title (<code>repo_&lt;GitHubUserName&gt;</code>, e.g. <code>repo_martinimus</code>). Then each person adds the other one as a collaborator.</p>
+<p>Once you are added as a collaborator, you link the collaborative repository (i.e. the repository where you were added as a collaborator, <em>not</em> your own) to RStudio and make some changes that you suggest to your collaborator by creating a pull request. Your collaborator will then assess the changes and you can have a bit of back-and-forth before accepting and merging the changes.</p>
+<p><br />
+</p>
+<blockquote>
+<h3 id="challenge-1---creating-a-repository-for-collaboration">Challenge 1 - Creating a repository for collaboration</h3>
+<ol style="list-style-type: decimal">
+<li>Create a new repository on GitHub. Name it <code>repo_&lt;GitHubUserName&gt;</code>, e.g. <code>repo_martinimus</code>.</li>
+<li>Find a collaborator and ask to be added as a collaborator to their repository. You should get a verification e-mail on the e-mail address that is registered with your GitHub account. Verify and check that the repository shows up on your GitHub page (remember, these will be in <code>Settings</code> &gt; <code>Repositories</code>).</li>
+<li>Put the collaborative repository under version control in RStudio (e.g. <code>repo_&lt;GitHubUserNameCollaborator&gt;</code>).</li>
+</ol>
+</blockquote>
+<p><br />
+</p>
+<blockquote>
+<h3 id="challenge-2---making-and-discussing-changes">Challenge 2 - Making and discussing changes</h3>
+<ol style="list-style-type: decimal">
+<li>Create a new branch on the collaborative repository, either through RStudio or the GitHub website.</li>
+<li>In RStudio, create a new R Markdown file in the collaborative repository and <strong>stage</strong>, <strong>commit</strong> and <strong>push</strong> the changes to the branch you have just created.</li>
+<li>Go to the repository you are both working on and start a <strong>pull request</strong> for the changes you just pushed.</li>
+<li>To practice, let the collaborator <strong>comment</strong> on the changes and ask for more details instead of merging the pull request.</li>
+<li>Amend the R Markdown file again with the requested details and commit/change/push again.</li>
+<li>The collaborator can now accept the changes and <strong>merge</strong> the branches.</li>
+</ol>
+</blockquote>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

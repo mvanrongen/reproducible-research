@@ -1,0 +1,743 @@
+---
+title: R Markdown
+author: Martin van Rongen & Alexia Cardona[^1]
+bibliography: references.bib
+link-citations: yes
+output:
+  html_document: 
+    toc: true
+    toc_float:
+      collapsed: false
+    toc_depth: 3
+---
+
+[^1]: These materials have been adapted from [Reproducible research in R](https://cambiotraining.github.io/reproducibility-training/rmarkdown.html), which has been developed by Alexia Cardona.
+
+```{r, echo = FALSE, purl = FALSE, message = FALSE}
+source("setup.R")
+gapminder <- read_csv("data/gapminder_1950_2018.csv")
+```
+
+<br/>
+
+# R Markdown
+
+[R Markdown](https://rmarkdown.rstudio.com) is integrated in RStudio and enables you to create documents, reports, presentations and dashboards. This in turn helps you to communicate your research better than using scripts alone. It does this because it supports extensive text formatting and easy code integration. That in turns enables you to walk a reader through an analysis much more easily than you would be able to do using comments in a script.
+
+An R Markdown file is made up of 3 basic components:
+
+  - header
+  - markdown
+  - R code chunks
+  
+Here we will assume that the output of our report is an `.html` file. HTML files are files for web pages.  This means that the report that we will generate can be easily deployed on the web.
+
+R Markdown can also be used to generate PDFs, Microsoft Word or Latex documents, among other things.
+
+## R Markdown header
+
+The markdown document starts with an optional header in YAML (_YAML Ain't Markup Language_) format known as the YAML metadata.  In the example below the `title`, `author` and `date` are specified in the header. Other options can be specified in the header such as table of content which we will look at later on in the course.  
+
+```
+---
+title: "Reproducible Research using R"
+author:  "Martin van Rongen"
+date: 26 May 2020
+---
+```
+
+To create a new R Markdown file go to `File -> New File -> R Markdown`. To generate the output file (in this case an html document), press the `knit` button:
+```{r, results='markup', echo=FALSE, purl=FALSE}
+knitr::include_graphics("img/knit_button.png")
+```
+
+Alternatively, use the corresponding keyboard shortcut (Mac `Cmd + Shift + K`, Windows `Ctrl + Shift + K`).
+
+## Markdown {#markdown-header}
+
+The text following the header in an Rmarkdown file is in Markdown syntax.  This is the syntax that gets converted to HTML format once we click on the Knit button or the Build website button (yes, you can deploy whole websites using R Markdown).  The philosophy behind Markdown is that it should be easy to write and easy to read.  
+
+The full documentation of the Markdown syntax can be found at https://pandoc.org/MANUAL.html.  However this might be a bit of information overload when you're starting. Therefore below is a simplified version of the Markdown syntax.
+
+\  
+
+### Headings
+
+Below is the `Markdown code` you need to use to specify headings at different levels and the rendered output respectively below the code:
+
+`# Heading 1`
+
+<p style="font-weight:500; font-size:34px">Heading 1</p>
+
+`## Heading 2`
+
+<p style="font-weight:500; font-size:30px">Heading 2</p>
+
+
+`### Heading 3`
+
+<p style="font-weight:500; font-size:24px">Heading 3</p>
+
+`#### Heading 4`
+
+<p style="font-weight:500; font-size:18px">Heading 4</p>
+
+\  
+
+### Inline text formatting
+
+To make text **bold** use `**double asterisks**` or `__double underscores__`.  
+To make text *italic* use `*asterisks*` or `_underscores_`.  
+To make text ^superscript^ use `^caret^`.  
+To make text ~subscript~ use `~tilde~`.  
+To mark text as `inline code` use `` `backticks` ``.   
+To  ~~strikethrough~~ text use `~~double tilde~~`.
+
+\  
+
+### Line breaks
+To create a line break, put more than 2 spaces at the end of a sentence or place `\` in a new line followed by a new line <img src="img/enter.png" width="20"/>.  
+
+\  
+
+### Links
+
+#### Linking text to Headers
+
+To link text to a header you would need to specify an identification tag next to a header as follows:
+
+`# Markdown {#markdown-header}`
+
+Then to link text to this header use `[link to header](#markdown-header)`.  This will be rendered as [link to header](#markdown-header).
+
+\ 
+
+
+#### Linking text to a webpage
+
+To create a link to a webpage use `[text of link](https://www.gapminder.org)`.  This is rendered as [text of link](https://www.gapminder.org). 
+
+\  
+
+#### Footnotes
+
+To indicate a footnote use`[^2]` and, for example, indicate another one as`[^3]` (I already used `[^1]`!) and then specify the wordings of the footnotes as:
+
+`[^2]: This is a footnote.`  
+`[^3]: Another footnote.`
+
+You do not need to put footnotes at the end of the document for them to be rendered there.  This example is rendered as follows:  
+
+To indicate a footnote use[^2] and, for example, indicate another one as[^3] and then specify the wordings of the footnotes as:
+
+[^2]: This is a footnote.  
+[^3]: Another footnote.
+
+\  
+
+> ### Challenge
+>
+>Try the following:
+>
+>1. Create an `R Project` if you haven't done so already
+>2. Start a new `R Markdown` file and save it in the appropriate subfolder (e.g. `notebooks`)
+>3. Think about one of your own projects and use that to come up with a title.
+>4. Create three levels of headings, sub-dividing your project and try out some of the inline text formatting.
+>5. Add a link to the [https://www.gapminder.org](https://www.gapminder.org) website (or any other website).
+>6. Use `knit` to render an html document and see if it looks like you expected.
+>
+
+### Lists
+
+#### Ordered lists
+
+To create an ordered list use the following syntax:
+
+```
+1. Item 1
+2. Item 2
+3. Item 3
+```
+
+This is rendered as:
+
+1. Item 1
+2. Item 2
+3. Item 3
+
+Use 4 spaces to indent an item if you would like to have sub-lists:
+```
+1. Item 1
+2. Item 2
+3. Item 3
+    a. Item 3a
+        i.  Item 3ai
+        ii. Item 3aii
+    b. Item 3b
+    c. Item 3c
+4. Item 4
+```
+
+1. Item 1
+2. Item 2
+3. Item 3
+    a. Item 3a
+        i.  Item 3ai
+        ii. Item 3aii
+    b. Item 3b
+    c. Item 3c
+4. Item 4
+
+\  
+
+#### Unordered lists
+
+In an unordered bulletted list, each item begins with `*`, `+` or `-`.  Example:
+
+```
+* Item 1
+* Item 2
+* Item 3
+    * Item 3a
+        *  Item 3ai
+        * Item 3aii
+    * Item 3b
+    * Item 3c
+* Item 4
+```
+Will be rendered as:
+
+* Item 1
+* Item 2
+* Item 3
+    * Item 3a
+        *  Item 3ai
+        * Item 3aii
+    * Item 3b
+    * Item 3c
+* Item 4
+
+\  
+
+#### Tasks list
+
+Tasks list can be done using the following syntax:
+
+```
+- [ ] an unchecked task list item
+- [x] checked item
+```
+
+This will be rendered as:
+
+- [ ] an unchecked task list item
+- [x] checked item
+
+\  
+
+### Inserting images
+
+To insert an image use the following syntax: `![Figure caption](path/to/image)`. Example:
+
+`![R Logo](img/Rlogo.png)`
+
+Will be rendered as:
+
+![R Logo](img/Rlogo.png)
+
+You can adjust the size of the image by adding a `width` and `height` in pixels in between curly brackets, like this:
+
+`![R Logo](img/Rlogo.png){width=100px height=100px}`
+
+will plot like
+
+![R Logo](img/Rlogo.png){width=100px height=100px}
+
+\  
+
+### Blocks
+
+Blocks or quotes in the notebook can be created by using the `>` sign as follows:
+
+```
+> "Life can be great, when you try something new."
+>
+> _Kevin the koala_
+```
+
+This is rendered as:
+
+> "Life can be great, when you try something new."
+>
+> _Kevin the koala_
+
+
+
+If you would like to add **code blocks**, use ` ``` ` before and after the code as follows:
+
+~~~
+```
+print("Hello world")
+x <- 1 + 2
+print(x)
+```
+~~~
+
+This will be rendered as:
+```
+print("Hello world")
+x <- 1 + 2
+print(x)
+```
+\  
+
+### Adding a table of contents
+
+To add a table of contents to your report add the following to the YAML header you need to specify the output (in this case a `html_document`) and set `toc` to `true`. If you want to make sure your table of contents stays visible even whilst scrolling, then you need to float it, using `toc_float: true`.
+
+```
+output:
+  html_document:
+    toc: true
+    toc_float: true
+```
+
+By default all headings up to level 3 headings are displayed in the table of contents.  You can adjust this by specifying `toc_depth` as following:
+
+```
+output:
+  html_document:
+    toc: true
+    toc_depth: 4
+```
+\  
+
+### Adding references
+
+Adding references and citations in Markdown is not as easy as reference manager software such as Mendeley. To be able to create citations you will need to create a bibliography file with all the references in it.  Here is an [example of a bibliography file](references.bib).  The bibligraphy file has to be placed in the same folder as the one where the `.Rmd` file is.  Next, add the following to the YAML header:
+
+```
+bibliography: references.bib
+link-citations: yes
+```
+Your YAML header should now look like:
+```
+---
+title: "Reproducible research using R"
+author:  Martin van Rongen
+date: 26 May 2020
+bibliography: references.bib
+link-citations: yes
+---
+```
+
+To cite a reference use the `@` together with the ID of the reference.  Example:
+
+`Citation to my paper @cardona2014 and @cardona2019`
+
+Will be rendered as:
+
+Citation to my paper @cardona2014 and @cardona2019
+
+To add the bibliography at the end of the report add a References heading at the end of the report:
+
+`# References`
+
+See [references](#refs) at the end of the report.
+
+See https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html for more information.  
+
+\  
+
+## R code chunks
+
+So far we have not used any R code and all the code we used so far is in Markdown.  As the name suggests, Rmarkdown files contain markdown and R.  Rmarkdown files have a `.Rmd` extention.  Using R in a markdown document makes sense if we integrate our analysis in our report. Some operations that we might need to do are; loading our dataset, performing some operations on the dataset and displaying results, either in a table or in a plot.  We will be doing all this in the following sections.
+
+If you would like to insert R code inside the notebook you will have to insert it inside an R code chunk to be able to execute it.  To do this click on the `Insert` button at the top of the Source panel in RStudio:
+
+```{r, results='markup', echo=FALSE, purl=FALSE, out.width='150px', fig.align='center'}
+knitr::include_graphics("img/insert_r_chunk.png")
+```
+
+Or use the associated shortcut (Mac `Cmd + Option + I`, Windows `Ctrl + Alt + I`).
+
+This creates an **R code chunk** as follows:
+
+```{r, results='markup', echo=FALSE, purl=FALSE, fig.align='center'}
+knitr::include_graphics("img/r_chunk.png")
+```
+
+Alternatively, you can type the r code chunk (although I recommended using the keyboard shortcut).  The R code should be placed in between the triple backticks.  Note that on the right hand side of the R code chunk there is a green "play" button that will run the R code chunk if pressed.  By default, when the Rmarkdown document is knitted, the R code will be executed and the R code chunk is displayed before the executed code.  
+
+To run a chunk you can use the `Run` button or the shortcut (Mac `Cmd + Shift + Enter`, Windows `Ctrl + Shift + Enter`).
+
+### Chunk names
+
+It is possible to give names to chunks using ` ```{r chunk_name} `. This has several advantages:
+
+* You can navigate more easily through your R Notebook using the drop-down code navigator:
+
+```{r, results='markup', echo=FALSE, purl=FALSE, fig.align='center'}
+knitr::include_graphics("img/code_navigator.png")
+```
+
+* Graphics produced by the chunks will have meaningful names based on the chunk name, which is a big improvement over `Untitled1.png`.
+
+* One chunk name has special meaning: `setup`. In R Notebooks the chunk named `setup` will automatically run only once, before any other chunks are run.
+
+### Chunk options
+
+You can control the output of chunks with different *options* in the chunk header (e.g. `{r, include = FALSE}`).
+
+These chunk options include:
+
+* `eval = FALSE` prevents code from being evaluated. No code is run and no output displayed. Useful to display example code or avoiding commenting out many lines.
+
+* `include = FALSE` do not display the code and results in the page after it is knitted.  The R code however still runs and therefore the variables or results in this code chunk can be used by the other chunks.  
+
+* `echo = FALSE` does not display the code, but it displays the results in the rendered file.  
+
+* `message = FALSE` or `warning = FALSE`  prevents messages or warnings from being displayed in the rendered file.
+
+There are almost 60 options by Knitr that you can use to customise your code blocks. A full list of options can be found [here](https://yihui.org/knitr/options/).
+
+\  
+
+## Gapminder data set
+
+So far we have not really played around with data. To help us understand better what we can do using R Markdown, we are going to import some data.
+
+To do the analysis, we will first create an R Notebook by going to `File -> New File -> R Notebook`. Note that this is different to `R Markdown` (which is further down the list). A detailed explanation of the differences between R Notebooks and R Markdown files can be found [here](http://uc-r.github.io/r_notebook), but practically for us it means you have a `Preview` button:
+```{r, results='markup', echo=FALSE, purl=FALSE}
+knitr::include_graphics("img/preview_button.png")
+```
+
+This makes it faster to see changes than constantly using the `Knit` function.
+
+Save your R Notebook as `gapminder_notebook.Rmd` to your existing R project (preferably in a logical place, such as a `scripts` or `notebooks` folder).
+\  
+
+### The dataset
+
+This dataset uses data from the [Gapminder Foundation](https://www.gapminder.org/). We're downloading the `gapminder_1950_2018.csv` dataset into our project. The data set contains a small fraction of the available data and has been cleaned up make it easy to work with for the purposes of this course.
+
+1. Create a `data` folder in your working directory.
+2. Download the dataset into the `data` folder by copying and running in the `Console` (no need to run it in your R Notebook, otherwise the data are downloaded every time):
+
+```
+download.file(url="https://raw.githubusercontent.com/mvanrongen/2020_Gates_Reproducibility/master/data/processed/gapminder_1950_2018.csv", destfile="data/gapminder_1950_2018.csv")
+```
+
+Next, perform the following steps:
+
+1. Create an R chunk and load the `tidyverse`, `kableExtra` and `rmarkdown` packages. We'll be using the `kableExtra` package for some fancy table displays, so if you haven't got it installed then install it using `install.packages("kableExtra")`.
+
+```{r, eval = FALSE}
+library(tidyverse)
+library(kableExtra)
+library(rmarkdown)
+```
+
+
+2. Read in the data using
+
+```{r, eval = FALSE}
+gapminder <- read_csv("data/gapminder_1950_2018.csv")
+```
+
+or if your `gapminder_notebook.Rmd` is in a subfolder, then navigate to it using
+
+```{r, eval = FALSE}
+gapminder <- read_csv("../data/gapminder_1950_2018.csv")
+```
+
+
+The `gapminder_1950_2018.csv` dataset that is loaded into the notebook contains several life statistics, amongst which life expectancy and income per person for each country per year from 1950 to 2018.  The dataset has the following columns:  
+
+| Column            | Description                                                  |
+|-------------------|--------------------------------------------------------------|
+| country_id        | Country ID                                                   |
+| country           | Country                                                      |
+| world_region      | Region of the world the country is located in                |
+| year              | Year the life expectancy and GDP per capita index applies to |
+| income_groups     | Category of income                                           |
+| income_per_person | Average income per person (GDP / population size)            |
+| life_expectancy   | Life expectancy (years)                                      |
+
+The dataset contains data for various countries across the world. Later we will be doing some data wrangling, so that we can focus on a subset of these.
+
+Now we're all set we can start looking at how to display some data using tables.
+
+\  
+
+## Tables {#tables}
+
+Tables can be created manually or dynamically.
+
+### Manually creating tables
+
+Although probably only useful for small tables, you can manually create tables, using `|`and `-` as follows:
+
+```
+| country_id  | country     |
+| ----------- | ----------- |
+| afg         | Afghanistan |
+| ago         | Angola      |
+```
+This is rendered as:
+
+| country_id  | country     |
+| ----------- | ----------- |
+| afg         | Afghanistan |
+| ago         | Angola      |
+
+Table alignments can be done using the following syntax:
+
+```
+| country_id (left) | country (centre) | world_region (right) |
+| :---              | :----:           | ---:                 |
+| afg               | Afghanistan      | south_asia           |
+| ago               | Angola           | sub_saharan_africa   |
+```
+This is rendered as:
+
+| country_id (left) | country (centre) | world_region (right) |
+| :---              | :----:           | ---:                 |
+| afg               | Afghanistan      | south_asia           |
+| ago               | Angola           | sub_saharan_africa   |
+
+\  
+
+### Dynamic tables using `rmarkdown`
+
+Clearly creating a large table this way is not very efficient or often even feasible when dealing with larger data sets. Furthermore, it goes against the principle of trying to make your research reproducible because the data are not generated through code.
+
+R Markdown has some basic functionality to create tables in HTML. The `paged_table()` function creates a table that supports paging rows and columns. When we use this on our data set it looks like this:
+
+```{r}
+gapminder %>% 
+  paged_table()
+```
+
+Note that I'm using pipes here, but `paged_table(gapminder)` would also work.
+
+\
+
+### Dynamic tables using `kableExtra`
+
+Apart from the basic functionalities available in `rmarkdown`, we can also use the `kableExtra` package, which uses the `knitr::kable()` function to generate tables. It allows you to build complex tables and adjust the table styles easily.
+
+More information can be found [here](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html).
+
+Let's explore that a bit more by generating a table that displays the life expectancy per country in the Americas in 2018, in descending order.
+
+The table is styled in twitter-fashion using `kable_styling()`, with striped rows that highlight when you hover over them.
+
+The table is embedded in a scroll box of a fixed dimension using `scroll_box`.
+
+```{r}
+gapminder %>% 
+  filter(world_region == "america",
+         year == 2018) %>%
+  select(country, life_expectancy) %>%
+  arrange(desc(life_expectancy)) %>% 
+  kable(caption = "Life expectancy in the Americas in 2018 (descending order)") %>% 
+  kable_styling(bootstrap_options = c("striped", "hover"), 
+                full_width = FALSE) %>% 
+  scroll_box(width = "100%", height = "400px")
+```
+
+\
+
+Somewhat frustratingly, pagination is not possible with `kable`. So if you have a long table, you are best off using the `paged_table()` function from the `rmarkdown` package.
+
+\  
+
+> ### Challenge 1 {#challenge_1}
+> 
+We are interested in the relationship between income and longevity. To investigate this, we can use the `income_per_person` and `life_expectancy` variables.
+> 
+Use your `gapminder_notebook.Rmd` R Notebook file to explore this further. First, we are going to do some plotting to get an idea of what the data look like. When doing this, remember to do the following:
+> 
+* use clear headings (e.g. `# Exploratory analysis`, `## Investigating income vs life expectancy` etc. to break up your code/explanations).
+* name your ` ``` {r} ` chunks to help you navigate through your code.
+> 
+Try the following (preferably use pipes (`%>%` symbol) to get one data flow):
+> 
+1. Filter the dataset for data from 2018 only (hint: use `filter`)
+2. Plot using `ggplot()` a scatterplot of `income_per_person` vs `life_expectancy`
+3. Colour the points by `income_group`
+4. Facet the data by `world_region` (hint: use `facet_wrap`, see [documentation](https://ggplot2.tidyverse.org/reference/facet_wrap.html))
+5. Look at the data and add some comments/observations.
+6. Knit the document and see if the report looks like how you expected it to be.
+> 
+> ```{r, answer=TRUE, eval=TRUE}
+gapminder %>% 
+  filter(year == 2018) %>% 
+  ggplot(mapping = aes(x = income_per_person, y = life_expectancy)) +
+  geom_point(mapping = aes(colour = income_groups)) +
+  facet_wrap(facets = vars(world_region))
+> ```
+ 
+\
+ 
+> ### Challenge 2
+> 
+> From the 2018 data it is clear that there are some strong differences in income per country, even per world region.
+> 
+It would be interesting to know which countries showed the highest income and in which year. Again, when doing this exercise, think about how you're going to communicate to others what you are doing.
+> 
+> Try the following:
+> 
+1. Find the highest income per `world_region` (hint: you'll have to group and arrange the data).
+2. Display only the highest income country (hint: `slice()`)
+3. Create a table using `kable()` in twitter-style with stripes and hover to display the data.
+> 
+> ```{r, answer=TRUE, eval=TRUE}
+gapminder %>% 
+  group_by(world_region) %>% 
+  arrange(desc(income_per_person)) %>% 
+  slice(1) %>%
+  kable(caption = "Highest income per person, per world region") %>% 
+  kable_styling(bootstrap_options = c("striped", "hover"), 
+                full_width = TRUE)
+  
+> ```
+
+\
+ 
+> ### Challenge 3
+> 
+> When looking at the 2018 data from [Challenge 1](#challenge_1) it appears that there is at least one country in the Americas that is classified as *low_income*.
+> 
+Try the following:
+> 
+1. Find which country is classified as "low_income" in the Americas (use `filter`).
+2. Using `ggplot()`, create a scatterplot of the `income_per_person` for that country over the years.
+3. Write some comments/observations. Is there anything unusual about the data? How would you interpret that?
+> 
+> ```{r, answer=TRUE, eval=TRUE}
+gapminder %>% 
+  filter(year == 2018,
+         world_region == "america",
+         income_groups == "low_income")
+> 
+gapminder %>% 
+  filter(country_id == "hti") %>% 
+  ggplot(mapping = aes(x = year, y = income_per_person)) +
+  geom_point()
+> ```
+> 
+
+\
+
+## Composing figures with `patchwork`
+
+One thing you would often want is to compose figures into different panels. There is a fantastic package in R that helps you do that for `ggplot()` output: [`patchwork'](https://cran.r-project.org/web/packages/patchwork/vignettes/patchwork.html).
+
+First, we need to install it. Run the following code in your **console**:
+
+```{r, eval = FALSE}
+install.packages("patchwork")
+```
+
+Then load the library:
+
+```{r, eval = FALSE}
+library(patchwork)
+```
+
+Patchwork requires you to assign plots to an object and then you can use mathematical operators such as `+`, `|`, `/` to organise your figures.
+
+Let's create a couple of figures using the `gapminder` data set and go through the options.
+
+Create a plot for `income_per_person` vs `life_expectancy` in the year 2000 for the Americas. Assign this to an object `p1` (plot 1).
+
+```{r}
+p1 <- gapminder %>% 
+  filter(year == 2000,
+         world_region == "america") %>%
+  ggplot(mapping = aes(x = income_per_person, y = life_expectancy)) +
+  geom_point()
+
+p1
+```
+
+Let's also plot `life_expectancy` in the United Kingdom over time:
+
+```{r}
+p2 <- gapminder %>% 
+  filter(country_id == "gbr") %>% 
+  ggplot(mapping = aes(x = year, y = life_expectancy)) +
+  geom_point() +
+  geom_line()
+
+p2
+```
+
+Finally, let's create a plot that shows the number of countries per world region.
+
+```{r}
+p3 <- gapminder %>% 
+  group_by(world_region) %>% 
+  summarise(n_countries = n_distinct(country)) %>% 
+  ggplot(mapping = aes(x = world_region, y = n_countries)) +
+  geom_col()
+
+p3
+```
+
+### Adding plots together
+
+The simplest way to add plots together using `patchwork` is to use the `+` operator:
+
+```{r}
+p1 + p2 + p3
+```
+
+You can control how the plots are displayed. For example, we can put the third plot (`p3` below the others):
+
+```{r}
+(p1 + p2) / p3
+```
+
+Or we can stretch out the first plot over two rows:
+
+```{r}
+p1 | (p2 / p3)
+```
+
+We can then further customise the plot. We can add annotations using `plot_annotation`:
+
+* add a **title** using `title = `
+* add **panel labels** using `tag_levels = ` (it takes different arguments, e.g. `A` for capital letters, `a` for lower case letters, `I` for Roman numerals etc.)
+
+
+```{r}
+(p1 | (p2 / p3)) +
+  plot_annotation(title = "Summary of gapminder data",
+                  tag_levels = "A")
+```
+
+There are more options available, which you can find on the [patchwork website](https://patchwork.data-imaginist.com/index.html).
+
+\
+
+# Summary
+
+Through R notebooks we can now integrate our R code and our results in one readable document that we can share with our collaborators.  In this way the code and the results have become one item. For inspiration, examples of R notebooks can be found at https://rpubs.com/
+
+**Limitations:**
+
+Some limitations that R Markdown has:
+
+* Figure and table numbering is not supported.  There is still a way around this, by using third-party packages *e.g.,* [captioner](https://cran.r-project.org/web/packages/captioner/vignettes/using_captioner.html) or [bookdown](https://bookdown.org/yihui/rmarkdown-cookbook/figure-number.html) (which is a great package to use when you want to group your analysis together in a book format!).
+*  If you are looking at specific customisations that are different from the default Markdown format, *e.g.,* headings using different font specifications, then this gets tricky and markdown might not be the best approach.  
+
+\  
+
+You have now learned how to create clear and reproducible reports to communicate your research. You probably noticed that in the process you have made many changes to your code and to your comments. In the next two sessions we will learn about how to keep track of these changes using **version control**.
+
+We will learn specifically about [Git](https://git-scm.com), a free and open source distributed version control system. We will also learn how to use [GitHub](https://github.com), a hosting platform for the distributed version control and source code management functionality of Git.
+
+# References {#refs}

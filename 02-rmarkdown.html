@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Martin van Rongen &amp; Alexia Cardona" />
+
+
+<title>R Markdown</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link rel="shortcut icon" href="favicon/favicon.ico">
+<link rel="icon" sizes="16x16 32x32 64x64" href="favicon/favicon.ico">
+<link rel="icon" type="image/png" sizes="196x196" href="favicon/favicon-192.png">
+<link rel="icon" type="image/png" sizes="160x160" href="favicon/favicon-160.png">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96.png">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon/favicon-64.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16.png">
+<link rel="apple-touch-icon" href="favicon/favicon-57.png">
+<link rel="apple-touch-icon" sizes="114x114" href="favicon/favicon-114.png">
+<link rel="apple-touch-icon" sizes="72x72" href="favicon/favicon-72.png">
+<link rel="apple-touch-icon" sizes="144x144" href="favicon/favicon-144.png">
+<link rel="apple-touch-icon" sizes="60x60" href="favicon/favicon-60.png">
+<link rel="apple-touch-icon" sizes="120x120" href="favicon/favicon-120.png">
+<link rel="apple-touch-icon" sizes="76x76" href="favicon/favicon-76.png">
+<link rel="apple-touch-icon" sizes="152x152" href="favicon/favicon-152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/favicon-180.png">
+<meta name="msapplication-TileColor" content="#FFFFFF">
+<meta name="msapplication-TileImage" content="favicon/favicon-144.png">
+<meta name="msapplication-config" content="favicon/browserconfig.xml">
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script>
+  $( function() {
+  $( ".accordion" ).accordion({
+      heightStyle: "content",
+      active: false,
+      collapsible: true
+    });
+  } );
+</script>
+
+<script>
+  <!-- search menu pop-up --->
+  $(function() {
+    function slideToggle() {
+      $("#search-box").toggle("slide", 500);
+  };
+  $("#search-icon").on("click", function() {
+  slideToggle();
+  });
+  });
+</script>
+
+
+
+<!-- Motomo analytics -->
+
+
+<script>
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+
+
+<!-- add  Algolia DocSearch -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://carpentries.matomo.cloud/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='https://cdn.matomo.cloud/carpentries.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="index.html">Home</a>
+        </li>
+        <li>
+          <a href="01-organisation_and_availability.html">Data organisation and availability</a>
+        </li>
+        <li>
+          <a href="02-rmarkdown.html">RMarkdown</a>
+        </li>
+        <li>
+          <a href="03-version_control_github.html">Version control and GitHub</a>
+        </li>
+        <li>
+          <a href="04-github.html">GitHub and RStudio</a>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">R Markdown</h1>
+<h4 class="author">Martin van Rongen &amp; Alexia Cardona<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h4>
+
+</div>
+
+
+<p><br/></p>
+<div id="r-markdown" class="section level1">
+<h1>R Markdown</h1>
+<p><a href="https://rmarkdown.rstudio.com">R Markdown</a> is integrated in RStudio and enables you to create documents, reports, presentations and dashboards. This in turn helps you to communicate your research better than using scripts alone. It does this because it supports extensive text formatting and easy code integration. That in turns enables you to walk a reader through an analysis much more easily than you would be able to do using comments in a script.</p>
+<p>An R Markdown file is made up of 3 basic components:</p>
+<ul>
+<li>header</li>
+<li>markdown</li>
+<li>R code chunks</li>
+</ul>
+<p>Here we will assume that the output of our report is an <code>.html</code> file. HTML files are files for web pages. This means that the report that we will generate can be easily deployed on the web.</p>
+<p>R Markdown can also be used to generate PDFs, Microsoft Word or Latex documents, among other things.</p>
+<div id="r-markdown-header" class="section level2">
+<h2>R Markdown header</h2>
+<p>The markdown document starts with an optional header in YAML (<em>YAML Ain’t Markup Language</em>) format known as the YAML metadata. In the example below the <code>title</code>, <code>author</code> and <code>date</code> are specified in the header. Other options can be specified in the header such as table of content which we will look at later on in the course.</p>
+<pre><code>---
+title: &quot;Reproducible Research using R&quot;
+author:  &quot;Martin van Rongen&quot;
+date: 26 May 2020
+---</code></pre>
+<p>To create a new R Markdown file go to <code>File -&gt; New File -&gt; R Markdown</code>. To generate the output file (in this case an html document), press the <code>knit</code> button: <img src="img/knit_button.png" width="67" /></p>
+<p>Alternatively, use the corresponding keyboard shortcut (Mac <code>Cmd + Shift + K</code>, Windows <code>Ctrl + Shift + K</code>).</p>
+</div>
+<div id="markdown-header" class="section level2">
+<h2>Markdown</h2>
+<p>The text following the header in an Rmarkdown file is in Markdown syntax. This is the syntax that gets converted to HTML format once we click on the Knit button or the Build website button (yes, you can deploy whole websites using R Markdown). The philosophy behind Markdown is that it should be easy to write and easy to read.</p>
+<p>The full documentation of the Markdown syntax can be found at <a href="https://pandoc.org/MANUAL.html" class="uri">https://pandoc.org/MANUAL.html</a>. However this might be a bit of information overload when you’re starting. Therefore below is a simplified version of the Markdown syntax.</p>
+<p> </p>
+<div id="headings" class="section level3">
+<h3>Headings</h3>
+<p>Below is the <code>Markdown code</code> you need to use to specify headings at different levels and the rendered output respectively below the code:</p>
+<p><code># Heading 1</code></p>
+<p style="font-weight:500; font-size:34px">
+Heading 1
+</p>
+<p><code>## Heading 2</code></p>
+<p style="font-weight:500; font-size:30px">
+Heading 2
+</p>
+<p><code>### Heading 3</code></p>
+<p style="font-weight:500; font-size:24px">
+Heading 3
+</p>
+<p><code>#### Heading 4</code></p>
+<p style="font-weight:500; font-size:18px">
+Heading 4
+</p>
+<p> </p>
+</div>
+<div id="inline-text-formatting" class="section level3">
+<h3>Inline text formatting</h3>
+<p>To make text <strong>bold</strong> use <code>**double asterisks**</code> or <code>__double underscores__</code>.<br />
+To make text <em>italic</em> use <code>*asterisks*</code> or <code>_underscores_</code>.<br />
+To make text <sup>superscript</sup> use <code>^caret^</code>.<br />
+To make text <sub>subscript</sub> use <code>~tilde~</code>.<br />
+To mark text as <code>inline code</code> use <code>`backticks`</code>.<br />
+To <del>strikethrough</del> text use <code>~~double tilde~~</code>.</p>
+<p> </p>
+</div>
+<div id="line-breaks" class="section level3">
+<h3>Line breaks</h3>
+<p>To create a line break, put more than 2 spaces at the end of a sentence or place <code>\</code> in a new line followed by a new line <img src="img/enter.png" width="20"/>.</p>
+<p> </p>
+</div>
+<div id="links" class="section level3">
+<h3>Links</h3>
+<div id="linking-text-to-headers" class="section level4">
+<h4>Linking text to Headers</h4>
+<p>To link text to a header you would need to specify an identification tag next to a header as follows:</p>
+<p><code># Markdown {#markdown-header}</code></p>
+<p>Then to link text to this header use <code>[link to header](#markdown-header)</code>. This will be rendered as <a href="#markdown-header">link to header</a>.</p>
+<p> </p>
+</div>
+<div id="linking-text-to-a-webpage" class="section level4">
+<h4>Linking text to a webpage</h4>
+<p>To create a link to a webpage use <code>[text of link](https://www.gapminder.org)</code>. This is rendered as <a href="https://www.gapminder.org">text of link</a>.</p>
+<p> </p>
+</div>
+<div id="footnotes" class="section level4">
+<h4>Footnotes</h4>
+<p>To indicate a footnote use<code>[^2]</code> and, for example, indicate another one as<code>[^3]</code> (I already used <code>[^1]</code>!) and then specify the wordings of the footnotes as:</p>
+<p><code>[^2]: This is a footnote.</code><br />
+<code>[^3]: Another footnote.</code></p>
+<p>You do not need to put footnotes at the end of the document for them to be rendered there. This example is rendered as follows:</p>
+<p>To indicate a footnote use<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> and, for example, indicate another one as<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> and then specify the wordings of the footnotes as:</p>
+<p> </p>
+<blockquote>
+<h3 id="challenge">Challenge</h3>
+<p>Try the following:</p>
+<ol style="list-style-type: decimal">
+<li>Create an <code>R Project</code> if you haven’t done so already</li>
+<li>Start a new <code>R Markdown</code> file and save it in the appropriate subfolder (e.g. <code>notebooks</code>)</li>
+<li>Think about one of your own projects and use that to come up with a title.</li>
+<li>Create three levels of headings, sub-dividing your project and try out some of the inline text formatting.</li>
+<li>Add a link to the <a href="https://www.gapminder.org">https://www.gapminder.org</a> website (or any other website).</li>
+<li>Use <code>knit</code> to render an html document and see if it looks like you expected.</li>
+</ol>
+</blockquote>
+</div>
+</div>
+<div id="lists" class="section level3">
+<h3>Lists</h3>
+<div id="ordered-lists" class="section level4">
+<h4>Ordered lists</h4>
+<p>To create an ordered list use the following syntax:</p>
+<pre><code>1. Item 1
+2. Item 2
+3. Item 3</code></pre>
+<p>This is rendered as:</p>
+<ol style="list-style-type: decimal">
+<li>Item 1</li>
+<li>Item 2</li>
+<li>Item 3</li>
+</ol>
+<p>Use 4 spaces to indent an item if you would like to have sub-lists:</p>
+<pre><code>1. Item 1
+2. Item 2
+3. Item 3
+    a. Item 3a
+        i.  Item 3ai
+        ii. Item 3aii
+    b. Item 3b
+    c. Item 3c
+4. Item 4</code></pre>
+<ol style="list-style-type: decimal">
+<li>Item 1</li>
+<li>Item 2</li>
+<li>Item 3
+<ol style="list-style-type: lower-alpha">
+<li>Item 3a
+<ol style="list-style-type: lower-roman">
+<li>Item 3ai</li>
+<li>Item 3aii</li>
+</ol></li>
+<li>Item 3b</li>
+<li>Item 3c</li>
+</ol></li>
+<li>Item 4</li>
+</ol>
+<p> </p>
+</div>
+<div id="unordered-lists" class="section level4">
+<h4>Unordered lists</h4>
+<p>In an unordered bulletted list, each item begins with <code>*</code>, <code>+</code> or <code>-</code>. Example:</p>
+<pre><code>* Item 1
+* Item 2
+* Item 3
+    * Item 3a
+        *  Item 3ai
+        * Item 3aii
+    * Item 3b
+    * Item 3c
+* Item 4</code></pre>
+<p>Will be rendered as:</p>
+<ul>
+<li>Item 1</li>
+<li>Item 2</li>
+<li>Item 3
+<ul>
+<li>Item 3a
+<ul>
+<li>Item 3ai</li>
+<li>Item 3aii</li>
+</ul></li>
+<li>Item 3b</li>
+<li>Item 3c</li>
+</ul></li>
+<li>Item 4</li>
+</ul>
+<p> </p>
+</div>
+<div id="tasks-list" class="section level4">
+<h4>Tasks list</h4>
+<p>Tasks list can be done using the following syntax:</p>
+<pre><code>- [ ] an unchecked task list item
+- [x] checked item</code></pre>
+<p>This will be rendered as:</p>
+<ul>
+<li>[ ] an unchecked task list item</li>
+<li>[x] checked item</li>
+</ul>
+<p> </p>
+</div>
+</div>
+<div id="inserting-images" class="section level3">
+<h3>Inserting images</h3>
+<p>To insert an image use the following syntax: <code>![Figure caption](path/to/image)</code>. Example:</p>
+<p><code>![R Logo](img/Rlogo.png)</code></p>
+<p>Will be rendered as:</p>
+<div class="figure">
+<img src="img/Rlogo.png" alt="R Logo" />
+<p class="caption">R Logo</p>
+</div>
+<p>You can adjust the size of the image by adding a <code>width</code> and <code>height</code> in pixels in between curly brackets, like this:</p>
+<p><code>![R Logo](img/Rlogo.png){width=100px height=100px}</code></p>
+<p>will plot like</p>
+<div class="figure">
+<img src="img/Rlogo.png" alt="R Logo" width="100" height="100" />
+<p class="caption">R Logo</p>
+</div>
+<p> </p>
+</div>
+<div id="blocks" class="section level3">
+<h3>Blocks</h3>
+<p>Blocks or quotes in the notebook can be created by using the <code>&gt;</code> sign as follows:</p>
+<pre><code>&gt; &quot;Life can be great, when you try something new.&quot;
+&gt;
+&gt; _Kevin the koala_</code></pre>
+<p>This is rendered as:</p>
+<blockquote>
+<p>“Life can be great, when you try something new.”</p>
+<p><em>Kevin the koala</em></p>
+</blockquote>
+<p>If you would like to add <strong>code blocks</strong>, use <code>```</code> before and after the code as follows:</p>
+<pre><code>```
+print(&quot;Hello world&quot;)
+x &lt;- 1 + 2
+print(x)
+```</code></pre>
+<p>This will be rendered as:</p>
+<pre><code>print(&quot;Hello world&quot;)
+x &lt;- 1 + 2
+print(x)</code></pre>
+<p> </p>
+</div>
+<div id="adding-a-table-of-contents" class="section level3">
+<h3>Adding a table of contents</h3>
+<p>To add a table of contents to your report add the following to the YAML header you need to specify the output (in this case a <code>html_document</code>) and set <code>toc</code> to <code>true</code>. If you want to make sure your table of contents stays visible even whilst scrolling, then you need to float it, using <code>toc_float: true</code>.</p>
+<pre><code>output:
+  html_document:
+    toc: true
+    toc_float: true</code></pre>
+<p>By default all headings up to level 3 headings are displayed in the table of contents. You can adjust this by specifying <code>toc_depth</code> as following:</p>
+<pre><code>output:
+  html_document:
+    toc: true
+    toc_depth: 4</code></pre>
+<p> </p>
+</div>
+<div id="adding-references" class="section level3">
+<h3>Adding references</h3>
+<p>Adding references and citations in Markdown is not as easy as reference manager software such as Mendeley. To be able to create citations you will need to create a bibliography file with all the references in it. Here is an <a href="references.bib">example of a bibliography file</a>. The bibligraphy file has to be placed in the same folder as the one where the <code>.Rmd</code> file is. Next, add the following to the YAML header:</p>
+<pre><code>bibliography: references.bib
+link-citations: yes</code></pre>
+<p>Your YAML header should now look like:</p>
+<pre><code>---
+title: &quot;Reproducible research using R&quot;
+author:  Martin van Rongen
+date: 26 May 2020
+bibliography: references.bib
+link-citations: yes
+---</code></pre>
+<p>To cite a reference use the <code>@</code> together with the ID of the reference. Example:</p>
+<p><code>Citation to my paper @cardona2014 and @cardona2019</code></p>
+<p>Will be rendered as:</p>
+<p>Citation to my paper <span class="citation">Cardona (<a href="#ref-cardona2014">2014</a>)</span> and <span class="citation">Cardona et al. (<a href="#ref-cardona2019">2019</a>)</span></p>
+<p>To add the bibliography at the end of the report add a References heading at the end of the report:</p>
+<p><code># References</code></p>
+<p>See <a href="#refs">references</a> at the end of the report.</p>
+<p>See <a href="https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html" class="uri">https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html</a> for more information.</p>
+<p> </p>
+</div>
+</div>
+<div id="r-code-chunks" class="section level2">
+<h2>R code chunks</h2>
+<p>So far we have not used any R code and all the code we used so far is in Markdown. As the name suggests, Rmarkdown files contain markdown and R. Rmarkdown files have a <code>.Rmd</code> extention. Using R in a markdown document makes sense if we integrate our analysis in our report. Some operations that we might need to do are; loading our dataset, performing some operations on the dataset and displaying results, either in a table or in a plot. We will be doing all this in the following sections.</p>
+<p>If you would like to insert R code inside the notebook you will have to insert it inside an R code chunk to be able to execute it. To do this click on the <code>Insert</code> button at the top of the Source panel in RStudio:</p>
+<p><img src="img/insert_r_chunk.png" width="150px" style="display: block; margin: auto;" /></p>
+<p>Or use the associated shortcut (Mac <code>Cmd + Option + I</code>, Windows <code>Ctrl + Alt + I</code>).</p>
+<p>This creates an <strong>R code chunk</strong> as follows:</p>
+<p><img src="img/r_chunk.png" width="749" style="display: block; margin: auto;" /></p>
+<p>Alternatively, you can type the r code chunk (although I recommended using the keyboard shortcut). The R code should be placed in between the triple backticks. Note that on the right hand side of the R code chunk there is a green “play” button that will run the R code chunk if pressed. By default, when the Rmarkdown document is knitted, the R code will be executed and the R code chunk is displayed before the executed code.</p>
+<p>To run a chunk you can use the <code>Run</code> button or the shortcut (Mac <code>Cmd + Shift + Enter</code>, Windows <code>Ctrl + Shift + Enter</code>).</p>
+<div id="chunk-names" class="section level3">
+<h3>Chunk names</h3>
+<p>It is possible to give names to chunks using <code>```{r chunk_name}</code>. This has several advantages:</p>
+<ul>
+<li>You can navigate more easily through your R Notebook using the drop-down code navigator:</li>
+</ul>
+<p><img src="img/code_navigator.png" width="266" style="display: block; margin: auto;" /></p>
+<ul>
+<li><p>Graphics produced by the chunks will have meaningful names based on the chunk name, which is a big improvement over <code>Untitled1.png</code>.</p></li>
+<li><p>One chunk name has special meaning: <code>setup</code>. In R Notebooks the chunk named <code>setup</code> will automatically run only once, before any other chunks are run.</p></li>
+</ul>
+</div>
+<div id="chunk-options" class="section level3">
+<h3>Chunk options</h3>
+<p>You can control the output of chunks with different <em>options</em> in the chunk header (e.g. <code>{r, include = FALSE}</code>).</p>
+<p>These chunk options include:</p>
+<ul>
+<li><p><code>eval = FALSE</code> prevents code from being evaluated. No code is run and no output displayed. Useful to display example code or avoiding commenting out many lines.</p></li>
+<li><p><code>include = FALSE</code> do not display the code and results in the page after it is knitted. The R code however still runs and therefore the variables or results in this code chunk can be used by the other chunks.</p></li>
+<li><p><code>echo = FALSE</code> does not display the code, but it displays the results in the rendered file.</p></li>
+<li><p><code>message = FALSE</code> or <code>warning = FALSE</code> prevents messages or warnings from being displayed in the rendered file.</p></li>
+</ul>
+<p>There are almost 60 options by Knitr that you can use to customise your code blocks. A full list of options can be found <a href="https://yihui.org/knitr/options/">here</a>.</p>
+<p> </p>
+</div>
+</div>
+<div id="gapminder-data-set" class="section level2">
+<h2>Gapminder data set</h2>
+<p>So far we have not really played around with data. To help us understand better what we can do using R Markdown, we are going to import some data.</p>
+<p>To do the analysis, we will first create an R Notebook by going to <code>File -&gt; New File -&gt; R Notebook</code>. Note that this is different to <code>R Markdown</code> (which is further down the list). A detailed explanation of the differences between R Notebooks and R Markdown files can be found <a href="http://uc-r.github.io/r_notebook">here</a>, but practically for us it means you have a <code>Preview</code> button: <img src="img/preview_button.png" width="90" /></p>
+<p>This makes it faster to see changes than constantly using the <code>Knit</code> function.</p>
+<p>Save your R Notebook as <code>gapminder_notebook.Rmd</code> to your existing R project (preferably in a logical place, such as a <code>scripts</code> or <code>notebooks</code> folder).  </p>
+<div id="the-dataset" class="section level3">
+<h3>The dataset</h3>
+<p>This dataset uses data from the <a href="https://www.gapminder.org/">Gapminder Foundation</a>. We’re downloading the <code>gapminder_1950_2018.csv</code> dataset into our project. The data set contains a small fraction of the available data and has been cleaned up make it easy to work with for the purposes of this course.</p>
+<ol style="list-style-type: decimal">
+<li>Create a <code>data</code> folder in your working directory.</li>
+<li>Download the dataset into the <code>data</code> folder by copying and running in the <code>Console</code> (no need to run it in your R Notebook, otherwise the data are downloaded every time):</li>
+</ol>
+<pre><code>download.file(url=&quot;https://raw.githubusercontent.com/mvanrongen/2020_Gates_Reproducibility/master/data/processed/gapminder_1950_2018.csv&quot;, destfile=&quot;data/gapminder_1950_2018.csv&quot;)</code></pre>
+<p>Next, perform the following steps:</p>
+<ol style="list-style-type: decimal">
+<li>Create an R chunk and load the <code>tidyverse</code>, <code>kableExtra</code> and <code>rmarkdown</code> packages. We’ll be using the <code>kableExtra</code> package for some fancy table displays, so if you haven’t got it installed then install it using <code>install.packages(&quot;kableExtra&quot;)</code>.</li>
+</ol>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="kw">library</span>(kableExtra)</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="kw">library</span>(rmarkdown)</a></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Read in the data using</li>
+</ol>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">gapminder &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/gapminder_1950_2018.csv&quot;</span>)</a></code></pre></div>
+<p>or if your <code>gapminder_notebook.Rmd</code> is in a subfolder, then navigate to it using</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">gapminder &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;../data/gapminder_1950_2018.csv&quot;</span>)</a></code></pre></div>
+<p>The <code>gapminder_1950_2018.csv</code> dataset that is loaded into the notebook contains several life statistics, amongst which life expectancy and income per person for each country per year from 1950 to 2018. The dataset has the following columns:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>country_id</td>
+<td>Country ID</td>
+</tr>
+<tr class="even">
+<td>country</td>
+<td>Country</td>
+</tr>
+<tr class="odd">
+<td>world_region</td>
+<td>Region of the world the country is located in</td>
+</tr>
+<tr class="even">
+<td>year</td>
+<td>Year the life expectancy and GDP per capita index applies to</td>
+</tr>
+<tr class="odd">
+<td>income_groups</td>
+<td>Category of income</td>
+</tr>
+<tr class="even">
+<td>income_per_person</td>
+<td>Average income per person (GDP / population size)</td>
+</tr>
+<tr class="odd">
+<td>life_expectancy</td>
+<td>Life expectancy (years)</td>
+</tr>
+</tbody>
+</table>
+<p>The dataset contains data for various countries across the world. Later we will be doing some data wrangling, so that we can focus on a subset of these.</p>
+<p>Now we’re all set we can start looking at how to display some data using tables.</p>
+<p> </p>
+</div>
+</div>
+<div id="tables" class="section level2">
+<h2>Tables</h2>
+<p>Tables can be created manually or dynamically.</p>
+<div id="manually-creating-tables" class="section level3">
+<h3>Manually creating tables</h3>
+<p>Although probably only useful for small tables, you can manually create tables, using <code>|</code>and <code>-</code> as follows:</p>
+<pre><code>| country_id  | country     |
+| ----------- | ----------- |
+| afg         | Afghanistan |
+| ago         | Angola      |</code></pre>
+<p>This is rendered as:</p>
+<table>
+<thead>
+<tr class="header">
+<th>country_id</th>
+<th>country</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>afg</td>
+<td>Afghanistan</td>
+</tr>
+<tr class="even">
+<td>ago</td>
+<td>Angola</td>
+</tr>
+</tbody>
+</table>
+<p>Table alignments can be done using the following syntax:</p>
+<pre><code>| country_id (left) | country (centre) | world_region (right) |
+| :---              | :----:           | ---:                 |
+| afg               | Afghanistan      | south_asia           |
+| ago               | Angola           | sub_saharan_africa   |</code></pre>
+<p>This is rendered as:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">country_id (left)</th>
+<th align="center">country (centre)</th>
+<th align="right">world_region (right)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">afg</td>
+<td align="center">Afghanistan</td>
+<td align="right">south_asia</td>
+</tr>
+<tr class="even">
+<td align="left">ago</td>
+<td align="center">Angola</td>
+<td align="right">sub_saharan_africa</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+</div>
+<div id="dynamic-tables-using-rmarkdown" class="section level3">
+<h3>Dynamic tables using <code>rmarkdown</code></h3>
+<p>Clearly creating a large table this way is not very efficient or often even feasible when dealing with larger data sets. Furthermore, it goes against the principle of trying to make your research reproducible because the data are not generated through code.</p>
+<p>R Markdown has some basic functionality to create tables in HTML. The <code>paged_table()</code> function creates a table that supports paging rows and columns. When we use this on our data set it looks like this:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="st">  </span><span class="kw">paged_table</span>()</a></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["country_id"],"name":[1],"type":["chr"],"align":["left"]},{"label":["country"],"name":[2],"type":["chr"],"align":["left"]},{"label":["world_region"],"name":[3],"type":["chr"],"align":["left"]},{"label":["year"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["income_groups"],"name":[5],"type":["chr"],"align":["left"]},{"label":["income_per_person"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["life_expectancy"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1950","5":"low_income","6":"1040","7":"32.0"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1951","5":"low_income","6":"1060","7":"32.4"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1952","5":"low_income","6":"1070","7":"33.0"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1953","5":"low_income","6":"1120","7":"33.7"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1954","5":"low_income","6":"1130","7":"34.4"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1955","5":"low_income","6":"1130","7":"35.1"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1956","5":"low_income","6":"1160","7":"35.8"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1957","5":"low_income","6":"1140","7":"36.5"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1958","5":"low_income","6":"1180","7":"37.2"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1959","5":"low_income","6":"1190","7":"37.9"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1960","5":"low_income","6":"1210","7":"38.6"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1961","5":"low_income","6":"1200","7":"39.4"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1962","5":"low_income","6":"1200","7":"40.1"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1963","5":"low_income","6":"1190","7":"40.8"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1964","5":"low_income","6":"1190","7":"41.5"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1965","5":"low_income","6":"1190","7":"42.2"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1966","5":"low_income","6":"1180","7":"42.9"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1967","5":"low_income","6":"1180","7":"43.7"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1968","5":"low_income","6":"1200","7":"44.4"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1969","5":"low_income","6":"1190","7":"45.1"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1970","5":"low_income","6":"1180","7":"45.8"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1971","5":"low_income","6":"1100","7":"45.9"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1972","5":"low_income","6":"1050","7":"45.9"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1973","5":"low_income","6":"1150","7":"46.0"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1974","5":"low_income","6":"1180","7":"46.1"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1975","5":"low_income","6":"1210","7":"46.3"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1976","5":"low_income","6":"1240","7":"46.5"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1977","5":"low_income","6":"1130","7":"46.6"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1978","5":"low_income","6":"1190","7":"45.0"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1979","5":"low_income","6":"1170","7":"43.6"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1980","5":"low_income","6":"1170","7":"43.3"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1981","5":"low_income","6":"1300","7":"44.1"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1982","5":"low_income","6":"1410","7":"43.8"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1983","5":"low_income","6":"1470","7":"42.0"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1984","5":"low_income","6":"1440","7":"39.8"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1985","5":"low_income","6":"1400","7":"41.6"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1986","5":"low_income","6":"1500","7":"42.6"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1987","5":"low_income","6":"1240","7":"44.7"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1988","5":"low_income","6":"1120","7":"47.0"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1989","5":"low_income","6":"1100","7":"50.8"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1990","5":"low_income","6":"1040","7":"51.6"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1991","5":"low_income","6":"1030","7":"51.3"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1992","5":"low_income","6":"950","7":"51.4"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1993","5":"low_income","6":"818","7":"51.4"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1994","5":"low_income","6":"732","7":"50.7"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1995","5":"low_income","6":"881","7":"51.1"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1996","5":"low_income","6":"904","7":"51.4"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1997","5":"low_income","6":"930","7":"51.1"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1998","5":"low_income","6":"956","7":"50.1"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"1999","5":"low_income","6":"982","7":"51.5"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"2000","5":"low_income","6":"972","7":"51.6"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"2001","5":"low_income","6":"871","7":"51.7"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"2002","5":"low_income","6":"1060","7":"52.4"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"2003","5":"low_income","6":"1100","7":"53.0"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"2004","5":"low_income","6":"1060","7":"53.5"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"2005","5":"low_income","6":"1140","7":"53.9"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"2006","5":"low_income","6":"1160","7":"54.1"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"2007","5":"low_income","6":"1290","7":"54.6"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"2008","5":"low_income","6":"1300","7":"55.2"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"2009","5":"low_income","6":"1530","7":"55.7"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"2010","5":"low_income","6":"1610","7":"56.2"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"2011","5":"low_income","6":"1660","7":"56.7"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"2012","5":"low_income","6":"1840","7":"57.2"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"2013","5":"low_income","6":"1810","7":"57.7"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"2014","5":"low_income","6":"1780","7":"57.8"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"2015","5":"low_income","6":"1750","7":"57.9"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"2016","5":"low_income","6":"1740","7":"58.0"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"2017","5":"low_income","6":"1800","7":"58.4"},{"1":"afg","2":"Afghanistan","3":"south_asia","4":"2018","5":"low_income","6":"1870","7":"58.7"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1950","5":"upper_middle_income","6":"3180","7":"36.6"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1951","5":"upper_middle_income","6":"3260","7":"36.9"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1952","5":"upper_middle_income","6":"3340","7":"37.5"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1953","5":"upper_middle_income","6":"3420","7":"38.1"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1954","5":"upper_middle_income","6":"3290","7":"38.7"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1955","5":"upper_middle_income","6":"3510","7":"39.3"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1956","5":"upper_middle_income","6":"3400","7":"39.9"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1957","5":"upper_middle_income","6":"3670","7":"40.5"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1958","5":"upper_middle_income","6":"3810","7":"41.2"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1959","5":"upper_middle_income","6":"3770","7":"41.8"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1960","5":"upper_middle_income","6":"3860","7":"42.4"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1961","5":"upper_middle_income","6":"4310","7":"43.0"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1962","5":"upper_middle_income","6":"4130","7":"43.6"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1963","5":"upper_middle_income","6":"4280","7":"44.3"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1964","5":"upper_middle_income","6":"4690","7":"44.9"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1965","5":"upper_middle_income","6":"4960","7":"45.5"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1966","5":"upper_middle_income","6":"5170","7":"46.2"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1967","5":"upper_middle_income","6":"5390","7":"46.8"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1968","5":"upper_middle_income","6":"5230","7":"47.4"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1969","5":"upper_middle_income","6":"5300","7":"48.1"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1970","5":"upper_middle_income","6":"5550","7":"48.7"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1971","5":"upper_middle_income","6":"5780","7":"49.0"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1972","5":"upper_middle_income","6":"5670","7":"49.2"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1973","5":"upper_middle_income","6":"6000","7":"49.4"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1974","5":"upper_middle_income","6":"6060","7":"49.6"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1975","5":"upper_middle_income","6":"5620","7":"49.5"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1976","5":"upper_middle_income","6":"5200","7":"49.5"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1977","5":"upper_middle_income","6":"5110","7":"49.6"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1978","5":"upper_middle_income","6":"4720","7":"49.7"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1979","5":"upper_middle_income","6":"4610","7":"49.8"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1980","5":"upper_middle_income","6":"4590","7":"49.9"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1981","5":"upper_middle_income","6":"4250","7":"50.0"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1982","5":"upper_middle_income","6":"4110","7":"50.0"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1983","5":"upper_middle_income","6":"4140","7":"50.1"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1984","5":"upper_middle_income","6":"4240","7":"50.2"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1985","5":"upper_middle_income","6":"4260","7":"50.3"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1986","5":"upper_middle_income","6":"4290","7":"50.2"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1987","5":"upper_middle_income","6":"4480","7":"50.0"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1988","5":"upper_middle_income","6":"4620","7":"49.8"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1989","5":"upper_middle_income","6":"4530","7":"50.2"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1990","5":"upper_middle_income","6":"4390","7":"50.2"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1991","5":"upper_middle_income","6":"4210","7":"50.8"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1992","5":"upper_middle_income","6":"3790","7":"51.0"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1993","5":"upper_middle_income","6":"2760","7":"49.7"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1994","5":"upper_middle_income","6":"2770","7":"51.1"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1995","5":"upper_middle_income","6":"2970","7":"52.0"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1996","5":"upper_middle_income","6":"3210","7":"52.3"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1997","5":"upper_middle_income","6":"3370","7":"52.7"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1998","5":"upper_middle_income","6":"3500","7":"52.8"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"1999","5":"upper_middle_income","6":"3510","7":"52.9"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"2000","5":"upper_middle_income","6":"3510","7":"53.4"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"2001","5":"upper_middle_income","6":"3540","7":"53.6"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"2002","5":"upper_middle_income","6":"3180","7":"54.5"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"2003","5":"upper_middle_income","6":"3240","7":"55.1"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"2004","5":"upper_middle_income","6":"3460","7":"55.7"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"2005","5":"upper_middle_income","6":"3950","7":"56.5"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"2006","5":"upper_middle_income","6":"4600","7":"57.0"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"2007","5":"upper_middle_income","6":"5440","7":"57.8"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"2008","5":"upper_middle_income","6":"5980","7":"58.6"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"2009","5":"upper_middle_income","6":"5910","7":"59.3"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"2010","5":"upper_middle_income","6":"5900","7":"60.1"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"2011","5":"upper_middle_income","6":"5910","7":"60.9"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"2012","5":"upper_middle_income","6":"6000","7":"61.7"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"2013","5":"upper_middle_income","6":"6190","7":"62.5"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"2014","5":"upper_middle_income","6":"6260","7":"63.3"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"2015","5":"upper_middle_income","6":"6230","7":"64.0"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"2016","5":"upper_middle_income","6":"6030","7":"64.7"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"2017","5":"upper_middle_income","6":"5940","7":"64.9"},{"1":"ago","2":"Angola","3":"sub_saharan_africa","4":"2018","5":"upper_middle_income","6":"5850","7":"65.2"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1950","5":"upper_middle_income","6":"1920","7":"54.5"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1951","5":"upper_middle_income","6":"2000","7":"54.7"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1952","5":"upper_middle_income","6":"2010","7":"55.2"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1953","5":"upper_middle_income","6":"2090","7":"55.8"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1954","5":"upper_middle_income","6":"2150","7":"56.5"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1955","5":"upper_middle_income","6":"2270","7":"57.3"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1956","5":"upper_middle_income","6":"2290","7":"58.3"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1957","5":"upper_middle_income","6":"2440","7":"59.3"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1958","5":"upper_middle_income","6":"2550","7":"60.4"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1959","5":"upper_middle_income","6":"2660","7":"61.6"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1960","5":"upper_middle_income","6":"2790","7":"62.7"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1961","5":"upper_middle_income","6":"2820","7":"63.7"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1962","5":"upper_middle_income","6":"2910","7":"64.6"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1963","5":"upper_middle_income","6":"3010","7":"65.3"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1964","5":"upper_middle_income","6":"3110","7":"65.9"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1965","5":"upper_middle_income","6":"3220","7":"66.3"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1966","5":"upper_middle_income","6":"3340","7":"66.5"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1967","5":"upper_middle_income","6":"3460","7":"66.7"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1968","5":"upper_middle_income","6":"3580","7":"66.9"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1969","5":"upper_middle_income","6":"3700","7":"67.1"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1970","5":"upper_middle_income","6":"3830","7":"67.4"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1971","5":"upper_middle_income","6":"3980","7":"68.0"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1972","5":"upper_middle_income","6":"4120","7":"68.6"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1973","5":"upper_middle_income","6":"4320","7":"69.2"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1974","5":"upper_middle_income","6":"4320","7":"69.8"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1975","5":"upper_middle_income","6":"4330","7":"70.3"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1976","5":"upper_middle_income","6":"4340","7":"70.8"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1977","5":"upper_middle_income","6":"4340","7":"71.3"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1978","5":"upper_middle_income","6":"4350","7":"71.7"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1979","5":"upper_middle_income","6":"4360","7":"72.0"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1980","5":"upper_middle_income","6":"4390","7":"72.3"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1981","5":"upper_middle_income","6":"4400","7":"72.4"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1982","5":"upper_middle_income","6":"4410","7":"72.5"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1983","5":"upper_middle_income","6":"4430","7":"72.6"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1984","5":"upper_middle_income","6":"4440","7":"72.8"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1985","5":"upper_middle_income","6":"4450","7":"73.0"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1986","5":"upper_middle_income","6":"4470","7":"73.2"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1987","5":"upper_middle_income","6":"4490","7":"73.2"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1988","5":"upper_middle_income","6":"4510","7":"73.4"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1989","5":"upper_middle_income","6":"4530","7":"73.7"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1990","5":"upper_middle_income","6":"4560","7":"73.9"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1991","5":"upper_middle_income","6":"3230","7":"73.9"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1992","5":"upper_middle_income","6":"3010","7":"73.9"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1993","5":"upper_middle_income","6":"3320","7":"73.9"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1994","5":"upper_middle_income","6":"3620","7":"74.0"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1995","5":"upper_middle_income","6":"4130","7":"74.1"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1996","5":"upper_middle_income","6":"4530","7":"74.3"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1997","5":"upper_middle_income","6":"4070","7":"72.5"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1998","5":"upper_middle_income","6":"4460","7":"74.3"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"1999","5":"upper_middle_income","6":"5100","7":"74.4"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"2000","5":"upper_middle_income","6":"5470","7":"74.4"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"2001","5":"upper_middle_income","6":"5960","7":"74.5"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"2002","5":"upper_middle_income","6":"6230","7":"74.5"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"2003","5":"upper_middle_income","6":"6620","7":"74.6"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"2004","5":"upper_middle_income","6":"7020","7":"74.7"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"2005","5":"upper_middle_income","6":"7460","7":"74.9"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"2006","5":"upper_middle_income","6":"7920","7":"75.2"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"2007","5":"upper_middle_income","6":"8450","7":"75.4"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"2008","5":"upper_middle_income","6":"9150","7":"75.6"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"2009","5":"upper_middle_income","6":"9530","7":"75.9"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"2010","5":"upper_middle_income","6":"9930","7":"76.3"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"2011","5":"upper_middle_income","6":"10200","7":"76.7"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"2012","5":"upper_middle_income","6":"10400","7":"77.0"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"2013","5":"upper_middle_income","6":"10500","7":"77.2"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"2014","5":"upper_middle_income","6":"10700","7":"77.4"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"2015","5":"upper_middle_income","6":"11000","7":"77.6"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"2016","5":"upper_middle_income","6":"11400","7":"77.7"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"2017","5":"upper_middle_income","6":"11900","7":"77.9"},{"1":"alb","2":"Albania","3":"europe_central_asia","4":"2018","5":"upper_middle_income","6":"12400","7":"78.0"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1970","5":"high_income","6":"33200","7":"76.0"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1971","5":"high_income","6":"33000","7":"76.3"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1972","5":"high_income","6":"34000","7":"76.6"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1973","5":"high_income","6":"34900","7":"76.9"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1974","5":"high_income","6":"35300","7":"77.2"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1975","5":"high_income","6":"34100","7":"77.4"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1976","5":"high_income","6":"34000","7":"77.7"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1977","5":"high_income","6":"34000","7":"78.0"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1978","5":"high_income","6":"33500","7":"78.3"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1979","5":"high_income","6":"32500","7":"78.6"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1980","5":"high_income","6":"32100","7":"78.7"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1981","5":"high_income","6":"30800","7":"78.8"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1982","5":"high_income","6":"29900","7":"78.8"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1983","5":"high_income","6":"29100","7":"78.8"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1984","5":"high_income","6":"28400","7":"79.0"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1985","5":"high_income","6":"27800","7":"79.1"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1986","5":"high_income","6":"27600","7":"79.2"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1987","5":"high_income","6":"27900","7":"79.3"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1988","5":"high_income","6":"28200","7":"79.3"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1989","5":"high_income","6":"28400","7":"79.4"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1990","5":"high_income","6":"28400","7":"79.5"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1991","5":"high_income","6":"28000","7":"79.5"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1992","5":"high_income","6":"27200","7":"79.6"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1993","5":"high_income","6":"26000","7":"79.8"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1994","5":"high_income","6":"25900","7":"80.0"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1995","5":"high_income","6":"26100","7":"80.3"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1996","5":"high_income","6":"27200","7":"80.6"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1997","5":"high_income","6":"29700","7":"81.0"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1998","5":"high_income","6":"30800","7":"81.3"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"1999","5":"high_income","6":"31900","7":"81.5"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"2000","5":"high_income","6":"31700","7":"81.8"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"2001","5":"high_income","6":"31800","7":"82.0"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"2002","5":"high_income","6":"31900","7":"82.3"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"2003","5":"high_income","6":"34500","7":"82.4"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"2004","5":"high_income","6":"36300","7":"82.3"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"2005","5":"high_income","6":"39800","7":"82.5"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"2006","5":"high_income","6":"42700","7":"82.5"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"2007","5":"high_income","6":"43400","7":"82.7"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"2008","5":"high_income","6":"41400","7":"82.7"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"2009","5":"high_income","6":"41700","7":"82.7"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"2010","5":"high_income","6":"39000","7":"82.7"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"2011","5":"high_income","6":"42000","7":"82.6"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"2012","5":"high_income","6":"41900","7":"82.6"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"2013","5":"high_income","6":"43700","7":"82.6"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"2014","5":"high_income","6":"44900","7":"82.6"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"2015","5":"high_income","6":"46600","7":"82.5"},{"1":"and","2":"Andorra","3":"europe_central_asia","4":"2016","5":"high_income","6":"48200","7":"82.5"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1950","5":"high_income","6":"1210","7":"43.4"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1951","5":"high_income","6":"1220","7":"44.0"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1952","5":"high_income","6":"1220","7":"45.3"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1953","5":"high_income","6":"1230","7":"46.6"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1954","5":"high_income","6":"1240","7":"47.9"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1955","5":"high_income","6":"1240","7":"49.1"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1956","5":"high_income","6":"1250","7":"50.3"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1957","5":"high_income","6":"1260","7":"51.5"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1958","5":"high_income","6":"1410","7":"52.7"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1959","5":"high_income","6":"1580","7":"53.8"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1960","5":"high_income","6":"1770","7":"55.0"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1961","5":"high_income","6":"1980","7":"56.1"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1962","5":"high_income","6":"2220","7":"57.2"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1963","5":"high_income","6":"2890","7":"58.4"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1964","5":"high_income","6":"4920","7":"59.5"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1965","5":"high_income","6":"8350","7":"60.5"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1966","5":"high_income","6":"14200","7":"61.6"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1967","5":"high_income","6":"24100","7":"62.6"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1968","5":"high_income","6":"29000","7":"63.5"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1969","5":"high_income","6":"34800","7":"64.4"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1970","5":"high_income","6":"41800","7":"65.2"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1971","5":"high_income","6":"40500","7":"66.3"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1972","5":"high_income","6":"38800","7":"66.8"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1973","5":"high_income","6":"59400","7":"67.3"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1974","5":"high_income","6":"145000","7":"67.8"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1975","5":"high_income","6":"163000","7":"68.3"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1976","5":"high_income","6":"161000","7":"68.9"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1977","5":"high_income","6":"163000","7":"69.4"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1978","5":"high_income","6":"139000","7":"69.8"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1979","5":"high_income","6":"155000","7":"70.3"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1980","5":"high_income","6":"178000","7":"70.8"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1981","5":"high_income","6":"176000","7":"71.3"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1982","5":"high_income","6":"154000","7":"71.7"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1983","5":"high_income","6":"141000","7":"71.8"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1984","5":"high_income","6":"136000","7":"72.2"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1985","5":"high_income","6":"126000","7":"72.5"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1986","5":"high_income","6":"97100","7":"72.5"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1987","5":"high_income","6":"98100","7":"72.6"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1988","5":"high_income","6":"80100","7":"72.6"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1989","5":"high_income","6":"89100","7":"72.6"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1990","5":"high_income","6":"111000","7":"72.8"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1991","5":"high_income","6":"106000","7":"72.9"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1992","5":"high_income","6":"103000","7":"73.1"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1993","5":"high_income","6":"98800","7":"73.2"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1994","5":"high_income","6":"100000","7":"73.4"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1995","5":"high_income","6":"102000","7":"73.5"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1996","5":"high_income","6":"102000","7":"73.7"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1997","5":"high_income","6":"105000","7":"74.0"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1998","5":"high_income","6":"101000","7":"74.3"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"1999","5":"high_income","6":"98300","7":"74.5"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"2000","5":"high_income","6":"103000","7":"74.8"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"2001","5":"high_income","6":"99300","7":"75.1"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"2002","5":"high_income","6":"96400","7":"75.4"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"2003","5":"high_income","6":"98400","7":"75.8"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"2004","5":"high_income","6":"98600","7":"76.2"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"2005","5":"high_income","6":"92300","7":"76.6"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"2006","5":"high_income","6":"88600","7":"76.8"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"2007","5":"high_income","6":"79300","7":"76.8"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"2008","5":"high_income","6":"71700","7":"76.8"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"2009","5":"high_income","6":"61100","7":"76.6"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"2010","5":"high_income","6":"57600","7":"76.5"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"2011","5":"high_income","6":"58400","7":"76.5"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"2012","5":"high_income","6":"59800","7":"76.4"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"2013","5":"high_income","6":"62500","7":"76.4"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"2014","5":"high_income","6":"64100","7":"76.4"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"2015","5":"high_income","6":"66000","7":"76.5"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"2016","5":"high_income","6":"67100","7":"76.6"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"2017","5":"high_income","6":"67700","7":"76.7"},{"1":"are","2":"United Arab Emirates","3":"middle_east_north_africa","4":"2018","5":"high_income","6":"68200","7":"76.9"},{"1":"arg","2":"Argentina","3":"america","4":"1950","5":"upper_middle_income","6":"8320","7":"60.6"},{"1":"arg","2":"Argentina","3":"america","4":"1951","5":"upper_middle_income","6":"8430","7":"60.9"},{"1":"arg","2":"Argentina","3":"america","4":"1952","5":"upper_middle_income","6":"7800","7":"61.5"},{"1":"arg","2":"Argentina","3":"america","4":"1953","5":"upper_middle_income","6":"8030","7":"62.0"},{"1":"arg","2":"Argentina","3":"america","4":"1954","5":"upper_middle_income","6":"8180","7":"62.5"},{"1":"arg","2":"Argentina","3":"america","4":"1955","5":"upper_middle_income","6":"8580","7":"62.9"},{"1":"arg","2":"Argentina","3":"america","4":"1956","5":"upper_middle_income","6":"8640","7":"63.2"},{"1":"arg","2":"Argentina","3":"america","4":"1957","5":"upper_middle_income","6":"8910","7":"63.5"},{"1":"arg","2":"Argentina","3":"america","4":"1958","5":"upper_middle_income","6":"9280","7":"63.7"},{"1":"arg","2":"Argentina","3":"america","4":"1959","5":"upper_middle_income","6":"8510","7":"63.9"},{"1":"arg","2":"Argentina","3":"america","4":"1960","5":"upper_middle_income","6":"9030","7":"64.1"},{"1":"arg","2":"Argentina","3":"america","4":"1961","5":"upper_middle_income","6":"9510","7":"64.2"},{"1":"arg","2":"Argentina","3":"america","4":"1962","5":"upper_middle_income","6":"9190","7":"64.3"},{"1":"arg","2":"Argentina","3":"america","4":"1963","5":"upper_middle_income","6":"8820","7":"64.3"},{"1":"arg","2":"Argentina","3":"america","4":"1964","5":"upper_middle_income","6":"9590","7":"64.4"},{"1":"arg","2":"Argentina","3":"america","4":"1965","5":"upper_middle_income","6":"10300","7":"64.5"},{"1":"arg","2":"Argentina","3":"america","4":"1966","5":"upper_middle_income","6":"10200","7":"64.6"},{"1":"arg","2":"Argentina","3":"america","4":"1967","5":"upper_middle_income","6":"10400","7":"64.7"},{"1":"arg","2":"Argentina","3":"america","4":"1968","5":"upper_middle_income","6":"10700","7":"64.9"},{"1":"arg","2":"Argentina","3":"america","4":"1969","5":"upper_middle_income","6":"11400","7":"65.1"},{"1":"arg","2":"Argentina","3":"america","4":"1970","5":"upper_middle_income","6":"11900","7":"65.4"},{"1":"arg","2":"Argentina","3":"america","4":"1971","5":"upper_middle_income","6":"12200","7":"65.7"},{"1":"arg","2":"Argentina","3":"america","4":"1972","5":"upper_middle_income","6":"12200","7":"66.0"},{"1":"arg","2":"Argentina","3":"america","4":"1973","5":"upper_middle_income","6":"12500","7":"66.4"},{"1":"arg","2":"Argentina","3":"america","4":"1974","5":"upper_middle_income","6":"13000","7":"66.8"},{"1":"arg","2":"Argentina","3":"america","4":"1975","5":"upper_middle_income","6":"12800","7":"67.3"},{"1":"arg","2":"Argentina","3":"america","4":"1976","5":"upper_middle_income","6":"12600","7":"67.8"},{"1":"arg","2":"Argentina","3":"america","4":"1977","5":"upper_middle_income","6":"13300","7":"68.2"},{"1":"arg","2":"Argentina","3":"america","4":"1978","5":"upper_middle_income","6":"12700","7":"68.8"},{"1":"arg","2":"Argentina","3":"america","4":"1979","5":"upper_middle_income","6":"13500","7":"69.4"},{"1":"arg","2":"Argentina","3":"america","4":"1980","5":"upper_middle_income","6":"13500","7":"69.8"},{"1":"arg","2":"Argentina","3":"america","4":"1981","5":"upper_middle_income","6":"12600","7":"70.2"},{"1":"arg","2":"Argentina","3":"america","4":"1982","5":"upper_middle_income","6":"12100","7":"70.5"},{"1":"arg","2":"Argentina","3":"america","4":"1983","5":"upper_middle_income","6":"12400","7":"70.6"},{"1":"arg","2":"Argentina","3":"america","4":"1984","5":"upper_middle_income","6":"12600","7":"70.9"},{"1":"arg","2":"Argentina","3":"america","4":"1985","5":"upper_middle_income","6":"11600","7":"71.3"},{"1":"arg","2":"Argentina","3":"america","4":"1986","5":"upper_middle_income","6":"12300","7":"71.6"},{"1":"arg","2":"Argentina","3":"america","4":"1987","5":"upper_middle_income","6":"12500","7":"71.8"},{"1":"arg","2":"Argentina","3":"america","4":"1988","5":"upper_middle_income","6":"12100","7":"71.9"},{"1":"arg","2":"Argentina","3":"america","4":"1989","5":"upper_middle_income","6":"11100","7":"72.0"},{"1":"arg","2":"Argentina","3":"america","4":"1990","5":"upper_middle_income","6":"10800","7":"72.1"},{"1":"arg","2":"Argentina","3":"america","4":"1991","5":"upper_middle_income","6":"12000","7":"72.3"},{"1":"arg","2":"Argentina","3":"america","4":"1992","5":"upper_middle_income","6":"13300","7":"72.5"},{"1":"arg","2":"Argentina","3":"america","4":"1993","5":"upper_middle_income","6":"13900","7":"72.7"},{"1":"arg","2":"Argentina","3":"america","4":"1994","5":"upper_middle_income","6":"14500","7":"73.0"},{"1":"arg","2":"Argentina","3":"america","4":"1995","5":"upper_middle_income","6":"13900","7":"73.1"},{"1":"arg","2":"Argentina","3":"america","4":"1996","5":"upper_middle_income","6":"14500","7":"73.3"},{"1":"arg","2":"Argentina","3":"america","4":"1997","5":"upper_middle_income","6":"15500","7":"73.5"},{"1":"arg","2":"Argentina","3":"america","4":"1998","5":"upper_middle_income","6":"15900","7":"73.7"},{"1":"arg","2":"Argentina","3":"america","4":"1999","5":"upper_middle_income","6":"15200","7":"73.9"},{"1":"arg","2":"Argentina","3":"america","4":"2000","5":"upper_middle_income","6":"14900","7":"74.2"},{"1":"arg","2":"Argentina","3":"america","4":"2001","5":"upper_middle_income","6":"14100","7":"74.4"},{"1":"arg","2":"Argentina","3":"america","4":"2002","5":"upper_middle_income","6":"12400","7":"74.5"},{"1":"arg","2":"Argentina","3":"america","4":"2003","5":"upper_middle_income","6":"13400","7":"74.6"},{"1":"arg","2":"Argentina","3":"america","4":"2004","5":"upper_middle_income","6":"14400","7":"74.9"},{"1":"arg","2":"Argentina","3":"america","4":"2005","5":"upper_middle_income","6":"15500","7":"75.2"},{"1":"arg","2":"Argentina","3":"america","4":"2006","5":"upper_middle_income","6":"16600","7":"75.3"},{"1":"arg","2":"Argentina","3":"america","4":"2007","5":"upper_middle_income","6":"17900","7":"75.3"},{"1":"arg","2":"Argentina","3":"america","4":"2008","5":"upper_middle_income","6":"18400","7":"75.5"},{"1":"arg","2":"Argentina","3":"america","4":"2009","5":"upper_middle_income","6":"17200","7":"75.7"},{"1":"arg","2":"Argentina","3":"america","4":"2010","5":"upper_middle_income","6":"18700","7":"75.8"},{"1":"arg","2":"Argentina","3":"america","4":"2011","5":"upper_middle_income","6":"19600","7":"76.0"},{"1":"arg","2":"Argentina","3":"america","4":"2012","5":"upper_middle_income","6":"19200","7":"76.1"},{"1":"arg","2":"Argentina","3":"america","4":"2013","5":"upper_middle_income","6":"19500","7":"76.2"},{"1":"arg","2":"Argentina","3":"america","4":"2014","5":"upper_middle_income","6":"18800","7":"76.4"},{"1":"arg","2":"Argentina","3":"america","4":"2015","5":"upper_middle_income","6":"19100","7":"76.5"},{"1":"arg","2":"Argentina","3":"america","4":"2016","5":"upper_middle_income","6":"18500","7":"76.7"},{"1":"arg","2":"Argentina","3":"america","4":"2017","5":"upper_middle_income","6":"18700","7":"76.8"},{"1":"arg","2":"Argentina","3":"america","4":"2018","5":"upper_middle_income","6":"18900","7":"77.0"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1950","5":"lower_middle_income","6":"1860","7":"58.7"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1951","5":"lower_middle_income","6":"1840","7":"58.8"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1952","5":"lower_middle_income","6":"1920","7":"59.2"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1953","5":"lower_middle_income","6":"1960","7":"59.5"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1954","5":"lower_middle_income","6":"2020","7":"59.9"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1955","5":"lower_middle_income","6":"2140","7":"60.3"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1956","5":"lower_middle_income","6":"2300","7":"60.6"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1957","5":"lower_middle_income","6":"2300","7":"60.9"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1958","5":"lower_middle_income","6":"2420","7":"61.3"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1959","5":"lower_middle_income","6":"2350","7":"61.7"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1960","5":"lower_middle_income","6":"2520","7":"62.0"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1961","5":"lower_middle_income","6":"2610","7":"62.4"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1962","5":"lower_middle_income","6":"2640","7":"62.7"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1963","5":"lower_middle_income","6":"2540","7":"63.1"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1964","5":"lower_middle_income","6":"2830","7":"63.5"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1965","5":"lower_middle_income","6":"2950","7":"63.8"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1966","5":"lower_middle_income","6":"3060","7":"64.2"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1967","5":"lower_middle_income","6":"3150","7":"64.5"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1968","5":"lower_middle_income","6":"3300","7":"64.9"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1969","5":"lower_middle_income","6":"3320","7":"65.2"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1970","5":"lower_middle_income","6":"3540","7":"65.5"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1971","5":"lower_middle_income","6":"3590","7":"66.0"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1972","5":"lower_middle_income","6":"3580","7":"66.5"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1973","5":"lower_middle_income","6":"3840","7":"67.1"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1974","5":"lower_middle_income","6":"3880","7":"67.6"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1975","5":"lower_middle_income","6":"3820","7":"68.0"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1976","5":"lower_middle_income","6":"3920","7":"68.4"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1977","5":"lower_middle_income","6":"3940","7":"68.8"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1978","5":"lower_middle_income","6":"3970","7":"69.2"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1979","5":"lower_middle_income","6":"3880","7":"69.4"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1980","5":"lower_middle_income","6":"3820","7":"69.6"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1981","5":"lower_middle_income","6":"3790","7":"69.9"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1982","5":"lower_middle_income","6":"3820","7":"70.4"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1983","5":"lower_middle_income","6":"3870","7":"70.3"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1984","5":"lower_middle_income","6":"3850","7":"70.6"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1985","5":"lower_middle_income","6":"3810","7":"70.7"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1986","5":"lower_middle_income","6":"3900","7":"71.2"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1987","5":"lower_middle_income","6":"3880","7":"71.4"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1988","5":"lower_middle_income","6":"3890","7":"55.0"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1989","5":"lower_middle_income","6":"3900","7":"70.6"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1990","5":"lower_middle_income","6":"3740","7":"70.2"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1991","5":"lower_middle_income","6":"3340","7":"70.0"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1992","5":"lower_middle_income","6":"1980","7":"69.0"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1993","5":"lower_middle_income","6":"1850","7":"68.7"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1994","5":"lower_middle_income","6":"1990","7":"68.9"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1995","5":"lower_middle_income","6":"2170","7":"69.3"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1996","5":"lower_middle_income","6":"2340","7":"69.5"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1997","5":"lower_middle_income","6":"2440","7":"70.3"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1998","5":"lower_middle_income","6":"2640","7":"70.7"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"1999","5":"lower_middle_income","6":"2740","7":"71.2"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"2000","5":"lower_middle_income","6":"2930","7":"71.8"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"2001","5":"lower_middle_income","6":"3220","7":"72.1"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"2002","5":"lower_middle_income","6":"3670","7":"72.5"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"2003","5":"lower_middle_income","6":"4210","7":"72.5"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"2004","5":"lower_middle_income","6":"4670","7":"72.7"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"2005","5":"lower_middle_income","6":"5360","7":"72.5"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"2006","5":"lower_middle_income","6":"6110","7":"72.5"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"2007","5":"lower_middle_income","6":"7010","7":"72.9"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"2008","5":"lower_middle_income","6":"7560","7":"72.8"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"2009","5":"lower_middle_income","6":"6530","7":"73.0"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"2010","5":"lower_middle_income","6":"6700","7":"73.3"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"2011","5":"lower_middle_income","6":"7020","7":"73.8"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"2012","5":"lower_middle_income","6":"7510","7":"74.3"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"2013","5":"lower_middle_income","6":"7730","7":"75.0"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"2014","5":"lower_middle_income","6":"7970","7":"75.4"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"2015","5":"lower_middle_income","6":"8180","7":"75.4"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"2016","5":"lower_middle_income","6":"8170","7":"75.7"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"2017","5":"lower_middle_income","6":"8410","7":"75.8"},{"1":"arm","2":"Armenia","3":"europe_central_asia","4":"2018","5":"lower_middle_income","6":"8660","7":"76.0"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1950","5":"high_income","6":"3470","7":"58.2"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1951","5":"high_income","6":"3560","7":"58.5"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1952","5":"high_income","6":"3650","7":"59.0"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1953","5":"high_income","6":"3730","7":"59.5"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1954","5":"high_income","6":"3830","7":"60.0"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1955","5":"high_income","6":"3920","7":"60.5"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1956","5":"high_income","6":"4010","7":"61.0"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1957","5":"high_income","6":"4110","7":"61.5"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1958","5":"high_income","6":"4210","7":"62.0"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1959","5":"high_income","6":"4310","7":"62.4"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1960","5":"high_income","6":"4420","7":"62.9"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1961","5":"high_income","6":"4530","7":"63.4"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1962","5":"high_income","6":"4640","7":"63.8"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1963","5":"high_income","6":"4750","7":"64.2"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1964","5":"high_income","6":"4870","7":"64.6"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1965","5":"high_income","6":"4980","7":"65.0"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1966","5":"high_income","6":"5100","7":"65.4"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1967","5":"high_income","6":"5230","7":"65.8"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1968","5":"high_income","6":"5360","7":"66.1"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1969","5":"high_income","6":"5490","7":"66.5"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1970","5":"high_income","6":"5620","7":"66.8"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1971","5":"high_income","6":"5890","7":"67.2"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1972","5":"high_income","6":"6160","7":"67.6"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1973","5":"high_income","6":"6540","7":"68.0"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1974","5":"high_income","6":"6650","7":"68.3"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1975","5":"high_income","6":"6230","7":"68.4"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1976","5":"high_income","6":"5670","7":"68.6"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1977","5":"high_income","6":"6140","7":"69.0"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1978","5":"high_income","6":"6440","7":"69.3"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1979","5":"high_income","6":"7250","7":"70.0"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1980","5":"high_income","6":"7850","7":"70.6"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1981","5":"high_income","6":"8350","7":"71.1"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1982","5":"high_income","6":"8470","7":"71.5"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1983","5":"high_income","6":"9150","7":"72.1"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1984","5":"high_income","6":"9960","7":"72.3"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1985","5":"high_income","6":"10900","7":"72.5"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1986","5":"high_income","6":"12100","7":"72.8"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1987","5":"high_income","6":"13400","7":"73.1"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1988","5":"high_income","6":"14800","7":"73.3"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1989","5":"high_income","6":"15900","7":"73.5"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1990","5":"high_income","6":"16400","7":"73.8"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1991","5":"high_income","6":"16600","7":"74.0"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1992","5":"high_income","6":"16500","7":"74.1"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1993","5":"high_income","6":"17000","7":"74.2"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1994","5":"high_income","6":"17700","7":"74.3"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1995","5":"high_income","6":"16500","7":"74.4"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1996","5":"high_income","6":"17100","7":"74.4"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1997","5":"high_income","6":"17500","7":"74.8"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1998","5":"high_income","6":"17900","7":"75.0"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"1999","5":"high_income","6":"18100","7":"74.9"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"2000","5":"high_income","6":"18800","7":"74.7"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"2001","5":"high_income","6":"17500","7":"75.1"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"2002","5":"high_income","6":"17500","7":"75.3"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"2003","5":"high_income","6":"18300","7":"75.5"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"2004","5":"high_income","6":"19200","7":"75.7"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"2005","5":"high_income","6":"20100","7":"75.9"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"2006","5":"high_income","6":"22500","7":"76.0"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"2007","5":"high_income","6":"24200","7":"76.4"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"2008","5":"high_income","6":"24000","7":"76.6"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"2009","5":"high_income","6":"20800","7":"76.9"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"2010","5":"high_income","6":"19100","7":"76.8"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"2011","5":"high_income","6":"18600","7":"76.9"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"2012","5":"high_income","6":"19100","7":"77.0"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"2013","5":"high_income","6":"18900","7":"77.3"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"2014","5":"high_income","6":"19500","7":"77.1"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"2015","5":"high_income","6":"20100","7":"77.2"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"2016","5":"high_income","6":"20800","7":"77.3"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"2017","5":"high_income","6":"20900","7":"77.4"},{"1":"atg","2":"Antigua and Barbuda","3":"america","4":"2018","5":"high_income","6":"21000","7":"77.6"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1950","5":"high_income","6":"12100","7":"69.3"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1951","5":"high_income","6":"12200","7":"69.0"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1952","5":"high_income","6":"12100","7":"69.4"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1953","5":"high_income","6":"12200","7":"70.0"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1954","5":"high_income","6":"12700","7":"70.2"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1955","5":"high_income","6":"13100","7":"70.5"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1956","5":"high_income","6":"13200","7":"70.4"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1957","5":"high_income","6":"13200","7":"70.7"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1958","5":"high_income","6":"13500","7":"71.2"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1959","5":"high_income","6":"14100","7":"70.8"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1960","5":"high_income","6":"14300","7":"71.3"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1961","5":"high_income","6":"14100","7":"71.5"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1962","5":"high_income","6":"14700","7":"71.3"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1963","5":"high_income","6":"15400","7":"71.4"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1964","5":"high_income","6":"16100","7":"71.0"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1965","5":"high_income","6":"16600","7":"71.4"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1966","5":"high_income","6":"16700","7":"71.2"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1967","5":"high_income","6":"17600","7":"71.5"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1968","5":"high_income","6":"18300","7":"71.1"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1969","5":"high_income","6":"18900","7":"71.5"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1970","5":"high_income","6":"19700","7":"71.2"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1971","5":"high_income","6":"20200","7":"71.5"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1972","5":"high_income","6":"20400","7":"71.8"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1973","5":"high_income","6":"21200","7":"72.0"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1974","5":"high_income","6":"21400","7":"72.2"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1975","5":"high_income","6":"21700","7":"72.7"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1976","5":"high_income","6":"22400","7":"73.0"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1977","5":"high_income","6":"22400","7":"73.5"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1978","5":"high_income","6":"22700","7":"73.9"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1979","5":"high_income","6":"23700","7":"74.3"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1980","5":"high_income","6":"23900","7":"74.6"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1981","5":"high_income","6":"24300","7":"74.9"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1982","5":"high_income","6":"23900","7":"75.0"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1983","5":"high_income","6":"23600","7":"75.3"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1984","5":"high_income","6":"24900","7":"75.5"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1985","5":"high_income","6":"25900","7":"75.7"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1986","5":"high_income","6":"26000","7":"76.0"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1987","5":"high_income","6":"26900","7":"76.2"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1988","5":"high_income","6":"27700","7":"76.4"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1989","5":"high_income","6":"28500","7":"76.6"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1990","5":"high_income","6":"28600","7":"77.0"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1991","5":"high_income","6":"28100","7":"77.4"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1992","5":"high_income","6":"27900","7":"77.6"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1993","5":"high_income","6":"28700","7":"77.9"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1994","5":"high_income","6":"29600","7":"78.1"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1995","5":"high_income","6":"30400","7":"78.3"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1996","5":"high_income","6":"31200","7":"78.5"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1997","5":"high_income","6":"32000","7":"78.8"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1998","5":"high_income","6":"33100","7":"79.1"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"1999","5":"high_income","6":"34400","7":"79.4"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"2000","5":"high_income","6":"35300","7":"79.7"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"2001","5":"high_income","6":"35500","7":"80.0"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"2002","5":"high_income","6":"36400","7":"80.2"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"2003","5":"high_income","6":"37100","7":"80.5"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"2004","5":"high_income","6":"38100","7":"80.8"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"2005","5":"high_income","6":"38900","7":"81.1"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"2006","5":"high_income","6":"39400","7":"81.3"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"2007","5":"high_income","6":"40700","7":"81.4"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"2008","5":"high_income","6":"41300","7":"81.6"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"2009","5":"high_income","6":"41200","7":"81.8"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"2010","5":"high_income","6":"41400","7":"82.0"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"2011","5":"high_income","6":"41800","7":"82.2"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"2012","5":"high_income","6":"42600","7":"82.3"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"2013","5":"high_income","6":"42900","7":"82.5"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"2014","5":"high_income","6":"43400","7":"82.6"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"2015","5":"high_income","6":"43800","7":"82.6"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"2016","5":"high_income","6":"44400","7":"82.5"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"2017","5":"high_income","6":"45100","7":"82.7"},{"1":"aus","2":"Australia","3":"east_asia_pacific","4":"2018","5":"high_income","6":"45800","7":"82.9"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1950","5":"high_income","6":"6940","7":"64.8"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1951","5":"high_income","6":"7400","7":"65.2"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1952","5":"high_income","6":"7410","7":"66.8"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1953","5":"high_income","6":"7720","7":"67.2"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1954","5":"high_income","6":"8490","7":"67.3"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1955","5":"high_income","6":"9400","7":"67.5"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1956","5":"high_income","6":"10000","7":"67.7"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1957","5":"high_income","6":"10600","7":"67.4"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1958","5":"high_income","6":"11000","7":"68.4"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1959","5":"high_income","6":"11200","7":"68.4"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1960","5":"high_income","6":"12100","7":"68.7"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1961","5":"high_income","6":"12600","7":"69.7"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1962","5":"high_income","6":"12900","7":"69.5"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1963","5":"high_income","6":"13300","7":"69.6"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1964","5":"high_income","6":"14000","7":"70.1"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1965","5":"high_income","6":"14300","7":"69.9"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1966","5":"high_income","6":"15000","7":"70.2"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1967","5":"high_income","6":"15300","7":"70.1"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1968","5":"high_income","6":"15900","7":"70.2"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1969","5":"high_income","6":"16800","7":"70.0"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1970","5":"high_income","6":"18000","7":"70.0"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1971","5":"high_income","6":"18800","7":"70.2"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1972","5":"high_income","6":"19800","7":"70.4"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1973","5":"high_income","6":"20700","7":"70.8"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1974","5":"high_income","6":"21500","7":"71.0"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1975","5":"high_income","6":"21500","7":"71.2"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1976","5":"high_income","6":"22500","7":"71.6"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1977","5":"high_income","6":"23600","7":"72.0"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1978","5":"high_income","6":"23500","7":"72.1"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1979","5":"high_income","6":"24800","7":"72.3"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1980","5":"high_income","6":"25400","7":"72.5"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1981","5":"high_income","6":"25300","7":"72.8"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1982","5":"high_income","6":"25800","7":"73.0"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1983","5":"high_income","6":"26600","7":"73.2"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1984","5":"high_income","6":"26700","7":"73.5"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1985","5":"high_income","6":"27300","7":"73.9"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1986","5":"high_income","6":"27900","7":"74.3"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1987","5":"high_income","6":"28300","7":"74.6"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1988","5":"high_income","6":"29100","7":"75.0"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1989","5":"high_income","6":"30300","7":"75.2"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1990","5":"high_income","6":"31300","7":"75.5"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1991","5":"high_income","6":"32000","7":"75.7"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1992","5":"high_income","6":"32300","7":"75.9"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1993","5":"high_income","6":"32200","7":"76.1"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1994","5":"high_income","6":"32900","7":"76.4"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1995","5":"high_income","6":"33700","7":"76.7"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1996","5":"high_income","6":"34500","7":"77.0"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1997","5":"high_income","6":"35200","7":"77.3"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1998","5":"high_income","6":"36400","7":"77.5"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"1999","5":"high_income","6":"37600","7":"77.8"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"2000","5":"high_income","6":"38800","7":"78.1"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"2001","5":"high_income","6":"39200","7":"78.5"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"2002","5":"high_income","6":"39600","7":"78.7"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"2003","5":"high_income","6":"39700","7":"78.9"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"2004","5":"high_income","6":"40600","7":"79.2"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"2005","5":"high_income","6":"41200","7":"79.5"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"2006","5":"high_income","6":"42300","7":"79.8"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"2007","5":"high_income","6":"43700","7":"80.0"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"2008","5":"high_income","6":"44300","7":"80.2"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"2009","5":"high_income","6":"42500","7":"80.3"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"2010","5":"high_income","6":"43200","7":"80.5"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"2011","5":"high_income","6":"44200","7":"80.7"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"2012","5":"high_income","6":"44400","7":"80.9"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"2013","5":"high_income","6":"44200","7":"81.1"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"2014","5":"high_income","6":"44100","7":"81.3"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"2015","5":"high_income","6":"44100","7":"81.4"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"2016","5":"high_income","6":"44100","7":"81.5"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"2017","5":"high_income","6":"44400","7":"81.7"},{"1":"aut","2":"Austria","3":"europe_central_asia","4":"2018","5":"high_income","6":"44600","7":"81.8"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1950","5":"upper_middle_income","6":"3640","7":"54.5"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1951","5":"upper_middle_income","6":"3600","7":"54.6"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1952","5":"upper_middle_income","6":"3770","7":"55.0"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1953","5":"upper_middle_income","6":"3860","7":"55.3"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1954","5":"upper_middle_income","6":"3990","7":"55.7"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1955","5":"upper_middle_income","6":"4250","7":"56.0"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1956","5":"upper_middle_income","6":"4580","7":"56.4"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1957","5":"upper_middle_income","6":"4600","7":"56.7"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1958","5":"upper_middle_income","6":"4860","7":"57.1"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1959","5":"upper_middle_income","6":"4720","7":"57.4"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1960","5":"upper_middle_income","6":"5080","7":"57.8"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1961","5":"upper_middle_income","6":"5290","7":"58.1"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1962","5":"upper_middle_income","6":"5350","7":"58.5"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1963","5":"upper_middle_income","6":"5160","7":"58.9"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1964","5":"upper_middle_income","6":"5750","7":"59.2"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1965","5":"upper_middle_income","6":"6010","7":"59.6"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1966","5":"upper_middle_income","6":"6240","7":"59.9"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1967","5":"upper_middle_income","6":"6460","7":"60.3"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1968","5":"upper_middle_income","6":"6780","7":"60.6"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1969","5":"upper_middle_income","6":"6820","7":"60.9"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1970","5":"upper_middle_income","6":"7290","7":"61.2"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1971","5":"upper_middle_income","6":"7420","7":"61.9"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1972","5":"upper_middle_income","6":"7400","7":"62.5"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1973","5":"upper_middle_income","6":"7950","7":"63.2"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1974","5":"upper_middle_income","6":"8080","7":"63.8"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1975","5":"upper_middle_income","6":"7990","7":"64.3"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1976","5":"upper_middle_income","6":"8260","7":"64.9"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1977","5":"upper_middle_income","6":"8350","7":"65.2"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1978","5":"upper_middle_income","6":"8460","7":"65.4"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1979","5":"upper_middle_income","6":"8320","7":"65.5"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1980","5":"upper_middle_income","6":"8230","7":"65.5"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1981","5":"upper_middle_income","6":"8210","7":"65.5"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1982","5":"upper_middle_income","6":"8310","7":"65.7"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1983","5":"upper_middle_income","6":"8470","7":"65.8"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1984","5":"upper_middle_income","6":"8470","7":"65.6"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1985","5":"upper_middle_income","6":"8440","7":"65.9"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1986","5":"upper_middle_income","6":"8670","7":"65.9"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1987","5":"upper_middle_income","6":"8680","7":"66.0"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1988","5":"upper_middle_income","6":"8760","7":"65.9"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1989","5":"upper_middle_income","6":"8810","7":"66.3"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1990","5":"upper_middle_income","6":"8510","7":"66.2"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1991","5":"upper_middle_income","6":"8320","7":"65.9"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1992","5":"upper_middle_income","6":"6350","7":"64.3"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1993","5":"upper_middle_income","6":"4810","7":"64.4"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1994","5":"upper_middle_income","6":"3810","7":"63.9"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1995","5":"upper_middle_income","6":"3320","7":"64.9"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1996","5":"upper_middle_income","6":"3330","7":"65.3"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1997","5":"upper_middle_income","6":"3490","7":"65.6"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1998","5":"upper_middle_income","6":"3800","7":"65.8"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"1999","5":"upper_middle_income","6":"4050","7":"66.1"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"2000","5":"upper_middle_income","6":"4460","7":"66.6"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"2001","5":"upper_middle_income","6":"4860","7":"67.2"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"2002","5":"upper_middle_income","6":"5340","7":"67.5"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"2003","5":"upper_middle_income","6":"5890","7":"67.3"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"2004","5":"upper_middle_income","6":"6440","7":"67.4"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"2005","5":"upper_middle_income","6":"8050","7":"67.6"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"2006","5":"upper_middle_income","6":"10700","7":"68.0"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"2007","5":"upper_middle_income","6":"13200","7":"68.3"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"2008","5":"upper_middle_income","6":"14400","7":"68.4"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"2009","5":"upper_middle_income","6":"15400","7":"68.8"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"2010","5":"upper_middle_income","6":"16000","7":"69.1"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"2011","5":"upper_middle_income","6":"15800","7":"69.9"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"2012","5":"upper_middle_income","6":"15900","7":"70.2"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"2013","5":"upper_middle_income","6":"16600","7":"71.0"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"2014","5":"upper_middle_income","6":"16700","7":"71.5"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"2015","5":"upper_middle_income","6":"16700","7":"71.8"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"2016","5":"upper_middle_income","6":"16000","7":"72.1"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"2017","5":"upper_middle_income","6":"16200","7":"72.2"},{"1":"aze","2":"Azerbaijan","3":"europe_central_asia","4":"2018","5":"upper_middle_income","6":"16600","7":"72.3"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1950","5":"low_income","6":"513","7":"39.0"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1951","5":"low_income","6":"534","7":"39.2"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1952","5":"low_income","6":"542","7":"39.5"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1953","5":"low_income","6":"556","7":"39.8"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1954","5":"low_income","6":"577","7":"40.1"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1955","5":"low_income","6":"586","7":"40.4"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1956","5":"low_income","6":"600","7":"40.8"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1957","5":"low_income","6":"613","7":"41.1"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1958","5":"low_income","6":"621","7":"41.4"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1959","5":"low_income","6":"646","7":"41.7"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1960","5":"low_income","6":"645","7":"42.0"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1961","5":"low_income","6":"543","7":"42.3"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1962","5":"low_income","6":"580","7":"42.7"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1963","5":"low_income","6":"596","7":"43.0"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1964","5":"low_income","6":"616","7":"43.3"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1965","5":"low_income","6":"624","7":"43.6"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1966","5":"low_income","6":"638","7":"43.9"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1967","5":"low_income","6":"681","7":"44.1"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1968","5":"low_income","6":"661","7":"44.4"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1969","5":"low_income","6":"643","7":"44.5"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1970","5":"low_income","6":"802","7":"44.7"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1971","5":"low_income","6":"849","7":"44.9"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1972","5":"low_income","6":"773","7":"18.2"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1973","5":"low_income","6":"828","7":"45.1"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1974","5":"low_income","6":"810","7":"45.2"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1975","5":"low_income","6":"802","7":"45.2"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1976","5":"low_income","6":"850","7":"45.3"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1977","5":"low_income","6":"936","7":"45.6"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1978","5":"low_income","6":"905","7":"45.8"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1979","5":"low_income","6":"882","7":"46.1"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1980","5":"low_income","6":"914","7":"46.3"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1981","5":"low_income","6":"974","7":"46.6"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1982","5":"low_income","6":"951","7":"46.9"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1983","5":"low_income","6":"959","7":"47.2"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1984","5":"low_income","6":"937","7":"47.4"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1985","5":"low_income","6":"1030","7":"47.6"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1986","5":"low_income","6":"1050","7":"47.7"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1987","5":"low_income","6":"1070","7":"47.9"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1988","5":"low_income","6":"1080","7":"48.0"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1989","5":"low_income","6":"1070","7":"48.0"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1990","5":"low_income","6":"1090","7":"48.0"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1991","5":"low_income","6":"1120","7":"47.9"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1992","5":"low_income","6":"1100","7":"47.8"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1993","5":"low_income","6":"1020","7":"41.8"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1994","5":"low_income","6":"959","7":"47.5"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1995","5":"low_income","6":"870","7":"47.0"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1996","5":"low_income","6":"790","7":"46.6"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1997","5":"low_income","6":"768","7":"47.0"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1998","5":"low_income","6":"795","7":"47.3"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"1999","5":"low_income","6":"775","7":"47.8"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"2000","5":"low_income","6":"754","7":"47.9"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"2001","5":"low_income","6":"751","7":"49.0"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"2002","5":"low_income","6":"763","7":"49.9"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"2003","5":"low_income","6":"731","7":"50.9"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"2004","5":"low_income","6":"742","7":"52.0"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"2005","5":"low_income","6":"724","7":"53.1"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"2006","5":"low_income","6":"738","7":"54.3"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"2007","5":"low_income","6":"748","7":"55.4"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"2008","5":"low_income","6":"759","7":"56.3"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"2009","5":"low_income","6":"760","7":"57.1"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"2010","5":"low_income","6":"764","7":"57.7"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"2011","5":"low_income","6":"772","7":"58.2"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"2012","5":"low_income","6":"779","7":"58.8"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"2013","5":"low_income","6":"791","7":"59.2"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"2014","5":"low_income","6":"803","7":"59.6"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"2015","5":"low_income","6":"749","7":"60.0"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"2016","5":"low_income","6":"721","7":"60.4"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"2017","5":"low_income","6":"705","7":"60.8"},{"1":"bdi","2":"Burundi","3":"sub_saharan_africa","4":"2018","5":"low_income","6":"691","7":"61.1"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1950","5":"high_income","6":"10300","7":"66.3"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1951","5":"high_income","6":"10800","7":"66.8"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1952","5":"high_income","6":"10700","7":"68.0"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1953","5":"high_income","6":"11000","7":"68.3"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1954","5":"high_income","6":"11400","7":"68.6"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1955","5":"high_income","6":"11700","7":"68.6"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1956","5":"high_income","6":"12000","7":"68.8"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1957","5":"high_income","6":"12200","7":"69.2"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1958","5":"high_income","6":"11900","7":"69.9"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1959","5":"high_income","6":"12100","7":"70.3"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1960","5":"high_income","6":"12600","7":"69.6"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1961","5":"high_income","6":"13100","7":"70.5"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1962","5":"high_income","6":"13700","7":"70.2"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1963","5":"high_income","6":"14100","7":"70.0"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1964","5":"high_income","6":"15000","7":"70.7"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1965","5":"high_income","6":"15300","7":"70.6"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1966","5":"high_income","6":"15700","7":"70.6"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1967","5":"high_income","6":"16200","7":"70.9"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1968","5":"high_income","6":"16800","7":"70.6"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1969","5":"high_income","6":"17800","7":"70.7"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1970","5":"high_income","6":"18900","7":"71.0"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1971","5":"high_income","6":"19500","7":"71.1"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1972","5":"high_income","6":"20500","7":"71.3"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1973","5":"high_income","6":"21600","7":"71.6"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1974","5":"high_income","6":"22500","7":"71.8"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1975","5":"high_income","6":"22100","7":"72.0"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1976","5":"high_income","6":"23400","7":"72.3"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1977","5":"high_income","6":"23500","7":"72.6"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1978","5":"high_income","6":"24100","7":"72.8"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1979","5":"high_income","6":"24700","7":"73.1"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1980","5":"high_income","6":"25800","7":"73.2"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1981","5":"high_income","6":"25400","7":"73.5"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1982","5":"high_income","6":"25800","7":"73.7"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1983","5":"high_income","6":"25800","7":"73.8"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1984","5":"high_income","6":"26500","7":"74.2"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1985","5":"high_income","6":"26700","7":"74.5"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1986","5":"high_income","6":"27100","7":"74.8"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1987","5":"high_income","6":"27700","7":"75.2"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1988","5":"high_income","6":"29000","7":"75.5"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1989","5":"high_income","6":"29900","7":"75.7"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1990","5":"high_income","6":"30700","7":"76.0"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1991","5":"high_income","6":"31100","7":"76.1"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1992","5":"high_income","6":"31500","7":"76.4"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1993","5":"high_income","6":"31100","7":"76.4"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1994","5":"high_income","6":"32000","7":"76.7"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1995","5":"high_income","6":"32700","7":"76.9"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1996","5":"high_income","6":"33100","7":"77.1"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1997","5":"high_income","6":"34300","7":"77.3"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1998","5":"high_income","6":"34900","7":"77.5"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"1999","5":"high_income","6":"36000","7":"77.6"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"2000","5":"high_income","6":"37300","7":"77.8"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"2001","5":"high_income","6":"37400","7":"78.0"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"2002","5":"high_income","6":"37900","7":"78.2"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"2003","5":"high_income","6":"38100","7":"78.5"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"2004","5":"high_income","6":"39300","7":"78.8"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"2005","5":"high_income","6":"39900","7":"79.1"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"2006","5":"high_income","6":"40600","7":"79.4"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"2007","5":"high_income","6":"41700","7":"79.5"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"2008","5":"high_income","6":"41700","7":"79.6"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"2009","5":"high_income","6":"40400","7":"79.8"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"2010","5":"high_income","6":"41100","7":"80.0"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"2011","5":"high_income","6":"41200","7":"80.2"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"2012","5":"high_income","6":"41000","7":"80.3"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"2013","5":"high_income","6":"40800","7":"80.5"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"2014","5":"high_income","6":"41400","7":"80.9"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"2015","5":"high_income","6":"41700","7":"80.9"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"2016","5":"high_income","6":"41900","7":"80.9"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"2017","5":"high_income","6":"42400","7":"81.1"},{"1":"bel","2":"Belgium","3":"europe_central_asia","4":"2018","5":"high_income","6":"42800","7":"81.2"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1950","5":"low_income","6":"1290","7":"35.7"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1951","5":"low_income","6":"1270","7":"36.0"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1952","5":"low_income","6":"1250","7":"36.6"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1953","5":"low_income","6":"1190","7":"37.2"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1954","5":"low_income","6":"1200","7":"37.8"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1955","5":"low_income","6":"1180","7":"38.3"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1956","5":"low_income","6":"1160","7":"38.9"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1957","5":"low_income","6":"1140","7":"39.5"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1958","5":"low_income","6":"1160","7":"40.0"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1959","5":"low_income","6":"1180","7":"40.5"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1960","5":"low_income","6":"1190","7":"41.1"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1961","5":"low_income","6":"1200","7":"41.6"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1962","5":"low_income","6":"1130","7":"42.2"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1963","5":"low_income","6":"1160","7":"42.8"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1964","5":"low_income","6":"1210","7":"43.3"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1965","5":"low_income","6":"1250","7":"43.9"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1966","5":"low_income","6":"1270","7":"44.6"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1967","5":"low_income","6":"1250","7":"45.2"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1968","5":"low_income","6":"1270","7":"45.9"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1969","5":"low_income","6":"1270","7":"46.5"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1970","5":"low_income","6":"1270","7":"47.2"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1971","5":"low_income","6":"1250","7":"47.6"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1972","5":"low_income","6":"1320","7":"48.2"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1973","5":"low_income","6":"1320","7":"48.7"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1974","5":"low_income","6":"1190","7":"49.2"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1975","5":"low_income","6":"1210","7":"49.6"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1976","5":"low_income","6":"1230","7":"50.0"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1977","5":"low_income","6":"1260","7":"50.3"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1978","5":"low_income","6":"1270","7":"50.7"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1979","5":"low_income","6":"1330","7":"51.1"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1980","5":"low_income","6":"1420","7":"51.5"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1981","5":"low_income","6":"1470","7":"52.0"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1982","5":"low_income","6":"1580","7":"52.5"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1983","5":"low_income","6":"1470","7":"53.0"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1984","5":"low_income","6":"1550","7":"53.3"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1985","5":"low_income","6":"1610","7":"53.7"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1986","5":"low_income","6":"1600","7":"54.3"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1987","5":"low_income","6":"1530","7":"54.8"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1988","5":"low_income","6":"1530","7":"55.2"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1989","5":"low_income","6":"1450","7":"55.3"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1990","5":"low_income","6":"1460","7":"55.5"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1991","5":"low_income","6":"1470","7":"55.6"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1992","5":"low_income","6":"1470","7":"56.0"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1993","5":"low_income","6":"1500","7":"56.4"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1994","5":"low_income","6":"1480","7":"56.4"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1995","5":"low_income","6":"1520","7":"56.5"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1996","5":"low_income","6":"1530","7":"56.4"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1997","5":"low_income","6":"1570","7":"56.9"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1998","5":"low_income","6":"1590","7":"57.1"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"1999","5":"low_income","6":"1620","7":"57.3"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"2000","5":"low_income","6":"1670","7":"57.6"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"2001","5":"low_income","6":"1700","7":"57.8"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"2002","5":"low_income","6":"1730","7":"58.2"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"2003","5":"low_income","6":"1740","7":"58.6"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"2004","5":"low_income","6":"1760","7":"59.0"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"2005","5":"low_income","6":"1740","7":"59.5"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"2006","5":"low_income","6":"1750","7":"59.9"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"2007","5":"low_income","6":"1810","7":"60.3"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"2008","5":"low_income","6":"1840","7":"60.8"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"2009","5":"low_income","6":"1830","7":"61.4"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"2010","5":"low_income","6":"1820","7":"61.8"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"2011","5":"low_income","6":"1820","7":"62.2"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"2012","5":"low_income","6":"1860","7":"62.6"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"2013","5":"low_income","6":"1940","7":"63.0"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"2014","5":"low_income","6":"2000","7":"63.4"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"2015","5":"low_income","6":"1990","7":"63.9"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"2016","5":"low_income","6":"2010","7":"64.4"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"2017","5":"low_income","6":"2080","7":"64.7"},{"1":"ben","2":"Benin","3":"sub_saharan_africa","4":"2018","5":"low_income","6":"2170","7":"65.0"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1950","5":"low_income","6":"524","7":"33.2"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1951","5":"low_income","6":"537","7":"33.5"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1952","5":"low_income","6":"550","7":"34.1"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1953","5":"low_income","6":"563","7":"34.7"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1954","5":"low_income","6":"576","7":"35.3"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1955","5":"low_income","6":"590","7":"35.8"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1956","5":"low_income","6":"605","7":"36.4"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1957","5":"low_income","6":"619","7":"36.9"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1958","5":"low_income","6":"634","7":"37.5"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1959","5":"low_income","6":"649","7":"38.1"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1960","5":"low_income","6":"659","7":"38.6"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1961","5":"low_income","6":"681","7":"39.2"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1962","5":"low_income","6":"717","7":"39.8"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1963","5":"low_income","6":"702","7":"40.4"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1964","5":"low_income","6":"711","7":"40.9"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1965","5":"low_income","6":"731","7":"41.5"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1966","5":"low_income","6":"726","7":"42.1"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1967","5":"low_income","6":"781","7":"42.7"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1968","5":"low_income","6":"794","7":"43.3"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1969","5":"low_income","6":"799","7":"43.8"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1970","5":"low_income","6":"790","7":"44.4"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1971","5":"low_income","6":"810","7":"44.5"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1972","5":"low_income","6":"830","7":"45.0"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1973","5":"low_income","6":"774","7":"45.3"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1974","5":"low_income","6":"747","7":"45.7"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1975","5":"low_income","6":"703","7":"46.1"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1976","5":"low_income","6":"683","7":"46.4"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1977","5":"low_income","6":"714","7":"46.8"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1978","5":"low_income","6":"778","7":"47.3"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1979","5":"low_income","6":"766","7":"47.8"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1980","5":"low_income","6":"759","7":"48.2"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1981","5":"low_income","6":"771","7":"48.6"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1982","5":"low_income","6":"767","7":"49.0"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1983","5":"low_income","6":"738","7":"49.2"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1984","5":"low_income","6":"729","7":"49.6"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1985","5":"low_income","6":"801","7":"50.1"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1986","5":"low_income","6":"900","7":"50.3"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1987","5":"low_income","6":"857","7":"50.3"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1988","5":"low_income","6":"898","7":"50.2"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1989","5":"low_income","6":"858","7":"50.6"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1990","5":"low_income","6":"821","7":"50.6"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1991","5":"low_income","6":"872","7":"50.7"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1992","5":"low_income","6":"851","7":"50.6"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1993","5":"low_income","6":"857","7":"50.7"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1994","5":"low_income","6":"845","7":"50.7"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1995","5":"low_income","6":"869","7":"50.7"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1996","5":"low_income","6":"938","7":"50.4"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1997","5":"low_income","6":"970","7":"50.9"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1998","5":"low_income","6":"1010","7":"51.4"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"1999","5":"low_income","6":"1060","7":"51.8"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"2000","5":"low_income","6":"1050","7":"52.2"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"2001","5":"low_income","6":"1080","7":"52.6"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"2002","5":"low_income","6":"1100","7":"53.1"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"2003","5":"low_income","6":"1150","7":"53.8"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"2004","5":"low_income","6":"1170","7":"54.4"},{"1":"bfa","2":"Burkina Faso","3":"sub_saharan_africa","4":"2005","5":"low_income","6":"1230","7":"55.1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Note that I’m using pipes here, but <code>paged_table(gapminder)</code> would also work.</p>
+<p><br />
+</p>
+</div>
+<div id="dynamic-tables-using-kableextra" class="section level3">
+<h3>Dynamic tables using <code>kableExtra</code></h3>
+<p>Apart from the basic functionalities available in <code>rmarkdown</code>, we can also use the <code>kableExtra</code> package, which uses the <code>knitr::kable()</code> function to generate tables. It allows you to build complex tables and adjust the table styles easily.</p>
+<p>More information can be found <a href="https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html">here</a>.</p>
+<p>Let’s explore that a bit more by generating a table that displays the life expectancy per country in the Americas in 2018, in descending order.</p>
+<p>The table is styled in twitter-fashion using <code>kable_styling()</code>, with striped rows that highlight when you hover over them.</p>
+<p>The table is embedded in a scroll box of a fixed dimension using <code>scroll_box</code>.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(world_region <span class="op">==</span><span class="st"> &quot;america&quot;</span>,</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">         year <span class="op">==</span><span class="st"> </span><span class="dv">2018</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(country, life_expectancy) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(life_expectancy)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb20-6" data-line-number="6"><span class="st">  </span><span class="kw">kable</span>(<span class="dt">caption =</span> <span class="st">&quot;Life expectancy in the Americas in 2018 (descending order)&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb20-7" data-line-number="7"><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">bootstrap_options =</span> <span class="kw">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>), </a>
+<a class="sourceLine" id="cb20-8" data-line-number="8">                <span class="dt">full_width =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb20-9" data-line-number="9"><span class="st">  </span><span class="kw">scroll_box</span>(<span class="dt">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="dt">height =</span> <span class="st">&quot;400px&quot;</span>)</a></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:400px; overflow-x: scroll; width:100%; ">
+<table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+Life expectancy in the Americas in 2018 (descending order)
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+country
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+life_expectancy
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Canada
+</td>
+<td style="text-align:right;">
+82.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Costa Rica
+</td>
+<td style="text-align:right;">
+81.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Chile
+</td>
+<td style="text-align:right;">
+80.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Peru
+</td>
+<td style="text-align:right;">
+80.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Panama
+</td>
+<td style="text-align:right;">
+79.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cuba
+</td>
+<td style="text-align:right;">
+79.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+United States
+</td>
+<td style="text-align:right;">
+79.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Nicaragua
+</td>
+<td style="text-align:right;">
+78.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Colombia
+</td>
+<td style="text-align:right;">
+78.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ecuador
+</td>
+<td style="text-align:right;">
+78.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Antigua and Barbuda
+</td>
+<td style="text-align:right;">
+77.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Uruguay
+</td>
+<td style="text-align:right;">
+77.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Argentina
+</td>
+<td style="text-align:right;">
+77.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Barbados
+</td>
+<td style="text-align:right;">
+76.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mexico
+</td>
+<td style="text-align:right;">
+76.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St. Lucia
+</td>
+<td style="text-align:right;">
+76.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dominican Republic
+</td>
+<td style="text-align:right;">
+76.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Venezuela
+</td>
+<td style="text-align:right;">
+75.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+El Salvador
+</td>
+<td style="text-align:right;">
+75.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Brazil
+</td>
+<td style="text-align:right;">
+75.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Jamaica
+</td>
+<td style="text-align:right;">
+75.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Paraguay
+</td>
+<td style="text-align:right;">
+74.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bahamas
+</td>
+<td style="text-align:right;">
+74.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bolivia
+</td>
+<td style="text-align:right;">
+74.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Trinidad and Tobago
+</td>
+<td style="text-align:right;">
+73.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Guatemala
+</td>
+<td style="text-align:right;">
+73.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Honduras
+</td>
+<td style="text-align:right;">
+73.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Belize
+</td>
+<td style="text-align:right;">
+72.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St. Vincent and the Grenadines
+</td>
+<td style="text-align:right;">
+72.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Grenada
+</td>
+<td style="text-align:right;">
+71.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Suriname
+</td>
+<td style="text-align:right;">
+71.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Guyana
+</td>
+<td style="text-align:right;">
+68.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Haiti
+</td>
+<td style="text-align:right;">
+64.5
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br />
+</p>
+<p>Somewhat frustratingly, pagination is not possible with <code>kable</code>. So if you have a long table, you are best off using the <code>paged_table()</code> function from the <code>rmarkdown</code> package.</p>
+<p> </p>
+<blockquote>
+<h3 id="challenge_1">Challenge 1</h3>
+<p>We are interested in the relationship between income and longevity. To investigate this, we can use the <code>income_per_person</code> and <code>life_expectancy</code> variables.</p>
+<p>Use your <code>gapminder_notebook.Rmd</code> R Notebook file to explore this further. First, we are going to do some plotting to get an idea of what the data look like. When doing this, remember to do the following:</p>
+<ul>
+<li>use clear headings (e.g. <code># Exploratory analysis</code>, <code>## Investigating income vs life expectancy</code> etc. to break up your code/explanations).</li>
+<li>name your <code>``` {r}</code> chunks to help you navigate through your code.</li>
+</ul>
+<p>Try the following (preferably use pipes (<code>%&gt;%</code> symbol) to get one data flow):</p>
+<ol style="list-style-type: decimal">
+<li>Filter the dataset for data from 2018 only (hint: use <code>filter</code>)</li>
+<li>Plot using <code>ggplot()</code> a scatterplot of <code>income_per_person</code> vs <code>life_expectancy</code></li>
+<li>Colour the points by <code>income_group</code></li>
+<li>Facet the data by <code>world_region</code> (hint: use <code>facet_wrap</code>, see <a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">documentation</a>)</li>
+<li>Look at the data and add some comments/observations.</li>
+<li>Knit the document and see if the report looks like how you expected it to be.</li>
+</ol>
+<div class="accordion">
+<h3 class="toc-ignore">
+Answer
+</h3>
+<div style="background: #fff;">
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2018</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> income_per_person, <span class="dt">y =</span> life_expectancy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">colour =</span> income_groups)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="dt">facets =</span> <span class="kw">vars</span>(world_region))</a></code></pre></div>
+<img src="img/reproducibility-unnamed-chunk-12-1.png" width="672" />
+</div>
+</div>
+</blockquote>
+<p><br />
+</p>
+<blockquote>
+<h3 id="challenge-2">Challenge 2</h3>
+<p>From the 2018 data it is clear that there are some strong differences in income per country, even per world region.</p>
+<p>It would be interesting to know which countries showed the highest income and in which year. Again, when doing this exercise, think about how you’re going to communicate to others what you are doing.</p>
+<p>Try the following:</p>
+<ol style="list-style-type: decimal">
+<li>Find the highest income per <code>world_region</code> (hint: you’ll have to group and arrange the data).</li>
+<li>Display only the highest income country (hint: <code>slice()</code>)</li>
+<li>Create a table using <code>kable()</code> in twitter-style with stripes and hover to display the data.</li>
+</ol>
+<div class="accordion">
+<h3 class="toc-ignore">
+Answer
+</h3>
+<div style="background: #fff;">
+
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(world_region) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(income_per_person)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-4" data-line-number="4"><span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb22-5" data-line-number="5"><span class="st">  </span><span class="kw">kable</span>(<span class="dt">caption =</span> <span class="st">&quot;Highest income per person, per world region&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-6" data-line-number="6"><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">bootstrap_options =</span> <span class="kw">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>), </a>
+<a class="sourceLine" id="cb22-7" data-line-number="7">                <span class="dt">full_width =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<caption>
+Highest income per person, per world region
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+country_id
+</th>
+<th style="text-align:left;">
+country
+</th>
+<th style="text-align:left;">
+world_region
+</th>
+<th style="text-align:right;">
+year
+</th>
+<th style="text-align:left;">
+income_groups
+</th>
+<th style="text-align:right;">
+income_per_person
+</th>
+<th style="text-align:right;">
+life_expectancy
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+usa
+</td>
+<td style="text-align:left;">
+United States
+</td>
+<td style="text-align:left;">
+america
+</td>
+<td style="text-align:right;">
+2018
+</td>
+<td style="text-align:left;">
+high_income
+</td>
+<td style="text-align:right;">
+54900
+</td>
+<td style="text-align:right;">
+79.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+brn
+</td>
+<td style="text-align:left;">
+Brunei
+</td>
+<td style="text-align:left;">
+east_asia_pacific
+</td>
+<td style="text-align:right;">
+1979
+</td>
+<td style="text-align:left;">
+high_income
+</td>
+<td style="text-align:right;">
+146000
+</td>
+<td style="text-align:right;">
+69.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lux
+</td>
+<td style="text-align:left;">
+Luxembourg
+</td>
+<td style="text-align:left;">
+europe_central_asia
+</td>
+<td style="text-align:right;">
+2018
+</td>
+<td style="text-align:left;">
+high_income
+</td>
+<td style="text-align:right;">
+99000
+</td>
+<td style="text-align:right;">
+82.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+are
+</td>
+<td style="text-align:left;">
+United Arab Emirates
+</td>
+<td style="text-align:left;">
+middle_east_north_africa
+</td>
+<td style="text-align:right;">
+1980
+</td>
+<td style="text-align:left;">
+high_income
+</td>
+<td style="text-align:right;">
+178000
+</td>
+<td style="text-align:right;">
+70.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mdv
+</td>
+<td style="text-align:left;">
+Maldives
+</td>
+<td style="text-align:left;">
+south_asia
+</td>
+<td style="text-align:right;">
+2018
+</td>
+<td style="text-align:left;">
+upper_middle_income
+</td>
+<td style="text-align:right;">
+13000
+</td>
+<td style="text-align:right;">
+80.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+gnq
+</td>
+<td style="text-align:left;">
+Equatorial Guinea
+</td>
+<td style="text-align:left;">
+sub_saharan_africa
+</td>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+high_income
+</td>
+<td style="text-align:right;">
+40000
+</td>
+<td style="text-align:right;">
+59.8
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</blockquote>
+<p><br />
+</p>
+<blockquote>
+<h3 id="challenge-3">Challenge 3</h3>
+<p>When looking at the 2018 data from <a href="#challenge_1">Challenge 1</a> it appears that there is at least one country in the Americas that is classified as <em>low_income</em>.</p>
+<p>Try the following:</p>
+<ol style="list-style-type: decimal">
+<li>Find which country is classified as “low_income” in the Americas (use <code>filter</code>).</li>
+<li>Using <code>ggplot()</code>, create a scatterplot of the <code>income_per_person</code> for that country over the years.</li>
+<li>Write some comments/observations. Is there anything unusual about the data? How would you interpret that?</li>
+</ol>
+<div class="accordion">
+<h3 class="toc-ignore">
+Answer
+</h3>
+<div style="background: #fff;">
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2018</span>,</a>
+<a class="sourceLine" id="cb23-3" data-line-number="3">         world_region <span class="op">==</span><span class="st"> &quot;america&quot;</span>,</a>
+<a class="sourceLine" id="cb23-4" data-line-number="4">         income_groups <span class="op">==</span><span class="st"> &quot;low_income&quot;</span>)</a></code></pre></div>
+<pre><code>#&gt; # A tibble: 1 x 7
+#&gt;   country_id country world_region  year income_groups income_per_pers…
+#&gt;   &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;                    &lt;dbl&gt;
+#&gt; 1 hti        Haiti   america       2018 low_income                1710
+#&gt; # … with 1 more variable: life_expectancy &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(country_id <span class="op">==</span><span class="st"> &quot;hti&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb25-3" data-line-number="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> income_per_person)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb25-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<img src="img/reproducibility-unnamed-chunk-14-1.png" width="672" />
+</div>
+</div>
+</blockquote>
+<p><br />
+</p>
+</div>
+</div>
+<div id="composing-figures-with-patchwork" class="section level2">
+<h2>Composing figures with <code>patchwork</code></h2>
+<p>One thing you would often want is to compose figures into different panels. There is a fantastic package in R that helps you do that for <code>ggplot()</code> output: <a href="https://cran.r-project.org/web/packages/patchwork/vignettes/patchwork.html">`patchwork’</a>.</p>
+<p>First, we need to install it. Run the following code in your <strong>console</strong>:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;patchwork&quot;</span>)</a></code></pre></div>
+<p>Then load the library:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">library</span>(patchwork)</a></code></pre></div>
+<p>Patchwork requires you to assign plots to an object and then you can use mathematical operators such as <code>+</code>, <code>|</code>, <code>/</code> to organise your figures.</p>
+<p>Let’s create a couple of figures using the <code>gapminder</code> data set and go through the options.</p>
+<p>Create a plot for <code>income_per_person</code> vs <code>life_expectancy</code> in the year 2000 for the Americas. Assign this to an object <code>p1</code> (plot 1).</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">p1 &lt;-<span class="st"> </span>gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2000</span>,</a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">         world_region <span class="op">==</span><span class="st"> &quot;america&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> income_per_person, <span class="dt">y =</span> life_expectancy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb28-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_point</span>()</a>
+<a class="sourceLine" id="cb28-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb28-7" data-line-number="7">p1</a></code></pre></div>
+<p><img src="img/reproducibility-unnamed-chunk-17-1.png" width="672" /></p>
+<p>Let’s also plot <code>life_expectancy</code> in the United Kingdom over time:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">p2 &lt;-<span class="st"> </span>gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(country_id <span class="op">==</span><span class="st"> &quot;gbr&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb29-3" data-line-number="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> life_expectancy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb29-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb29-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_line</span>()</a>
+<a class="sourceLine" id="cb29-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb29-7" data-line-number="7">p2</a></code></pre></div>
+<p><img src="img/reproducibility-unnamed-chunk-18-1.png" width="672" /></p>
+<p>Finally, let’s create a plot that shows the number of countries per world region.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">p3 &lt;-<span class="st"> </span>gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(world_region) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb30-3" data-line-number="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n_countries =</span> <span class="kw">n_distinct</span>(country)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb30-4" data-line-number="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> world_region, <span class="dt">y =</span> n_countries)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb30-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_col</span>()</a>
+<a class="sourceLine" id="cb30-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb30-7" data-line-number="7">p3</a></code></pre></div>
+<p><img src="img/reproducibility-unnamed-chunk-19-1.png" width="672" /></p>
+<div id="adding-plots-together" class="section level3">
+<h3>Adding plots together</h3>
+<p>The simplest way to add plots together using <code>patchwork</code> is to use the <code>+</code> operator:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">p1 <span class="op">+</span><span class="st"> </span>p2 <span class="op">+</span><span class="st"> </span>p3</a></code></pre></div>
+<p><img src="img/reproducibility-unnamed-chunk-20-1.png" width="672" /></p>
+<p>You can control how the plots are displayed. For example, we can put the third plot (<code>p3</code> below the others):</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">(p1 <span class="op">+</span><span class="st"> </span>p2) <span class="op">/</span><span class="st"> </span>p3</a></code></pre></div>
+<p><img src="img/reproducibility-unnamed-chunk-21-1.png" width="672" /></p>
+<p>Or we can stretch out the first plot over two rows:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">p1 <span class="op">|</span><span class="st"> </span>(p2 <span class="op">/</span><span class="st"> </span>p3)</a></code></pre></div>
+<p><img src="img/reproducibility-unnamed-chunk-22-1.png" width="672" /></p>
+<p>We can then further customise the plot. We can add annotations using <code>plot_annotation</code>:</p>
+<ul>
+<li>add a <strong>title</strong> using <code>title =</code></li>
+<li>add <strong>panel labels</strong> using <code>tag_levels =</code> (it takes different arguments, e.g. <code>A</code> for capital letters, <code>a</code> for lower case letters, <code>I</code> for Roman numerals etc.)</li>
+</ul>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">(p1 <span class="op">|</span><span class="st"> </span>(p2 <span class="op">/</span><span class="st"> </span>p3)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="st">  </span><span class="kw">plot_annotation</span>(<span class="dt">title =</span> <span class="st">&quot;Summary of gapminder data&quot;</span>,</a>
+<a class="sourceLine" id="cb34-3" data-line-number="3">                  <span class="dt">tag_levels =</span> <span class="st">&quot;A&quot;</span>)</a></code></pre></div>
+<p><img src="img/reproducibility-unnamed-chunk-23-1.png" width="672" /></p>
+<p>There are more options available, which you can find on the <a href="https://patchwork.data-imaginist.com/index.html">patchwork website</a>.</p>
+<p><br />
+</p>
+</div>
+</div>
+</div>
+<div id="summary" class="section level1">
+<h1>Summary</h1>
+<p>Through R notebooks we can now integrate our R code and our results in one readable document that we can share with our collaborators. In this way the code and the results have become one item. For inspiration, examples of R notebooks can be found at <a href="https://rpubs.com/" class="uri">https://rpubs.com/</a></p>
+<p><strong>Limitations:</strong></p>
+<p>Some limitations that R Markdown has:</p>
+<ul>
+<li>Figure and table numbering is not supported. There is still a way around this, by using third-party packages <em>e.g.,</em> <a href="https://cran.r-project.org/web/packages/captioner/vignettes/using_captioner.html">captioner</a> or <a href="https://bookdown.org/yihui/rmarkdown-cookbook/figure-number.html">bookdown</a> (which is a great package to use when you want to group your analysis together in a book format!).</li>
+<li>If you are looking at specific customisations that are different from the default Markdown format, <em>e.g.,</em> headings using different font specifications, then this gets tricky and markdown might not be the best approach.</li>
+</ul>
+<p> </p>
+<p>You have now learned how to create clear and reproducible reports to communicate your research. You probably noticed that in the process you have made many changes to your code and to your comments. In the next two sessions we will learn about how to keep track of these changes using <strong>version control</strong>.</p>
+<p>We will learn specifically about <a href="https://git-scm.com">Git</a>, a free and open source distributed version control system. We will also learn how to use <a href="https://github.com">GitHub</a>, a hosting platform for the distributed version control and source code management functionality of Git.</p>
+</div>
+<div id="refs" class="section level1 unnumbered">
+<h1>References</h1>
+<div id="refs" class="references">
+<div id="ref-cardona2019">
+<p>Cardona, Alexia, Felix R. Day, John R.B. Perry, Marie Loh, Audrey Y. Chu, Benjamin Lehne, Dirk S. Paul, et al. 2019. “Epigenome-Wide Association Study of Incident Type 2 Diabetes in a British Population: EPIC-Norfolk Study.” <em>Diabetes</em>. American Diabetes Association. <a href="https://doi.org/10.2337/db18-0290">https://doi.org/10.2337/db18-0290</a>.</p>
+</div>
+<div id="ref-cardona2014">
+<p>Cardona, Luca AND Antao, Alexia AND Pagani. 2014. “Genome-Wide Analysis of Cold Adaptation in Indigenous Siberian Populations.” <em>PLOS ONE</em> 9 (5). Public Library of Science: 1–11. <a href="https://doi.org/10.1371/journal.pone.0098076">https://doi.org/10.1371/journal.pone.0098076</a>.</p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>These materials have been adapted from <a href="https://cambiotraining.github.io/reproducibility-training/rmarkdown.html">Reproducible research in R</a>, which has been developed by Alexia Cardona.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>This is a footnote.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>Another footnote.<a href="#fnref3" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

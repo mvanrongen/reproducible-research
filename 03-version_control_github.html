@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Martin van Rongen" />
+
+
+<title>Version control and GitHub</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link rel="shortcut icon" href="favicon/favicon.ico">
+<link rel="icon" sizes="16x16 32x32 64x64" href="favicon/favicon.ico">
+<link rel="icon" type="image/png" sizes="196x196" href="favicon/favicon-192.png">
+<link rel="icon" type="image/png" sizes="160x160" href="favicon/favicon-160.png">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96.png">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon/favicon-64.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16.png">
+<link rel="apple-touch-icon" href="favicon/favicon-57.png">
+<link rel="apple-touch-icon" sizes="114x114" href="favicon/favicon-114.png">
+<link rel="apple-touch-icon" sizes="72x72" href="favicon/favicon-72.png">
+<link rel="apple-touch-icon" sizes="144x144" href="favicon/favicon-144.png">
+<link rel="apple-touch-icon" sizes="60x60" href="favicon/favicon-60.png">
+<link rel="apple-touch-icon" sizes="120x120" href="favicon/favicon-120.png">
+<link rel="apple-touch-icon" sizes="76x76" href="favicon/favicon-76.png">
+<link rel="apple-touch-icon" sizes="152x152" href="favicon/favicon-152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/favicon-180.png">
+<meta name="msapplication-TileColor" content="#FFFFFF">
+<meta name="msapplication-TileImage" content="favicon/favicon-144.png">
+<meta name="msapplication-config" content="favicon/browserconfig.xml">
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script>
+  $( function() {
+  $( ".accordion" ).accordion({
+      heightStyle: "content",
+      active: false,
+      collapsible: true
+    });
+  } );
+</script>
+
+<script>
+  <!-- search menu pop-up --->
+  $(function() {
+    function slideToggle() {
+      $("#search-box").toggle("slide", 500);
+  };
+  $("#search-icon").on("click", function() {
+  slideToggle();
+  });
+  });
+</script>
+
+
+
+<!-- Motomo analytics -->
+
+
+<script>
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+
+
+<!-- add  Algolia DocSearch -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://carpentries.matomo.cloud/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='https://cdn.matomo.cloud/carpentries.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="index.html">Home</a>
+        </li>
+        <li>
+          <a href="01-organisation_and_availability.html">Data organisation and availability</a>
+        </li>
+        <li>
+          <a href="02-rmarkdown.html">RMarkdown</a>
+        </li>
+        <li>
+          <a href="03-version_control_github.html">Version control and GitHub</a>
+        </li>
+        <li>
+          <a href="04-github.html">GitHub and RStudio</a>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Version control and GitHub</h1>
+<h4 class="author">Martin van Rongen</h4>
+
+</div>
+
+
+<p><br />
+</p>
+<div id="version-control" class="section level1">
+<h1>Version control</h1>
+<p>I would imagine that most people here will have found themselves in this situation before:</p>
+<p><img src="img/phdcomic.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>I certainly have! And over the years I’ve tried different ways of organising revisions. For documents it works quite well to start your document title with a date, for example <code>2020-04-05_Project_analysis.docx</code> so that a new version would have a more recent data, such as <code>2020-05-08_Project_analysis.docx</code>. That way your revisions are organised in chronological order.</p>
+<p>If you are working with multiple people on the same document you can add initials to the end, e.g. <code>2020-04-05_Project_analysis_JD.docx</code>, so you know who has reviewed/commented on the document. You can then merge documents within MS Word, if you’re using that.</p>
+<p>More recently, I’ve become a fan of <a href="https://www.google.co.uk/docs/about/">Google Docs</a>, which provides much of the functionality of MS Office, but allows you to work remotely on a document with other people. Changes are registered in its <strong>History</strong> and you can go back through time.</p>
+<p>All this works reasonably well for documents, but this is less suitable for code, where changes are made often and have clear consequences on the workings of the code further down. This gets us to the topic of <strong>version control systems</strong>, of which <a href="https://git-scm.com">Git</a> is one.</p>
+<p>Git allows you to keep track of changes to your code <em>and</em> share those changes with others. It works particularly well when used in conjunction with <a href="https://github.com">GitHub</a>, a website that enables sharing your code with others.</p>
+<p>In general, there are two different types of version control systems: <strong>centralised</strong> and <strong>distributed</strong>. Both types of version control systems their changes in a database, called a <strong>repository</strong>. All work is done on a personal copy, called a <strong>working copy</strong>. We’ll briefly go through the differences between how these two systems function in this context.</p>
+<p><br />
+</p>
+<div id="centralised-version-control-systems" class="section level2">
+<h2>Centralised version control systems</h2>
+<p>The centralised version control system has just one centralised repository. Each user has its own working copy to which changes are made. These changes are then communicated with the central server that holds the (centralised) repository. You commit your changes to the server, other users update and can directly see your changes.</p>
+<p><img src="img/centralised-vcs.png" width="260" /></p>
+<p>Image by Michael Ernst<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<p><br />
+</p>
+</div>
+<div id="distributed-version-control-systems" class="section level2">
+<h2>Distributed version control systems</h2>
+<p>The distributed version control system works a little different, where each user not only has their own working copy, but also their own repository. You commit your changes to your repository but other people cannot see those changes yet. For that to happen you need to push your changes to the central repository. You do not get other people’s changes, unless you specifically pull those changes into your own repository.</p>
+<p><img src="img/distributed-vcs.png" width="296" /></p>
+<p>Image by Michael Ernst<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p>
+<p>Here we will be using <strong>Git</strong>, which is a distributed version control system. Version control with Git works differently to all other version control systems in the way that it views the data. Whereas other version control systems store information as <strong>changes to a base version</strong> of a file (thus tracking how a file changes over time), Git stores data <strong>as a snapshot of the project</strong> over time. If a file has changed then Git stores the file again and if a file is unchanged then it links to the original, unchanged file.</p>
+<p>As such, Git can be thought of as a mini file system<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
+<p><br />
+</p>
+</div>
+<div id="git-workflow" class="section level2">
+<h2>Git workflow</h2>
+<p>Although Git can work entirely local, it is usually used in conjunction with a remote storage - in our case GitHub.</p>
+<p>You have a <strong>working directory</strong> on your computer that contains all the files that you are working on. There is also a <strong>local repository</strong> inside your working directory that contains an object database with all the versions of the files, changes, commits etc. associated with your files. Lastly, there usually is a <strong>remote repository</strong> that contains a copy of your local files and local repository. In our case, this remote repository is on GitHub.</p>
+<p>GitHub needs to know which files to track, which are added to the <strong>index</strong>. These files are staged for a <strong>commit</strong>, which creates a snapshot of your files in time. The commit is always accompanied by a message that explains what the changes are that are being committed.</p>
+<p>When you are happy with the commit you’ve made on your (local) computer, then you can <strong>push</strong> these changes to your remote repository on GitHub and it will be updated.</p>
+<p><img src="img/git_workflow.png" width="1082" /></p>
+<p>The image was adapted from the <a href="https://i.redd.it/8341g68g1v7y.png">RebelLabs Git Cheat Sheet</a>.</p>
+<p><br />
+</p>
+<div id="branches" class="section level3">
+<h3>Branches</h3>
+<p>If you are working on something by yourself then you’re able to judge whether or not you want to push any changes to your remote repository. Things get a bit more complicated when you are working in a team, because multiple people could work on the same file and the changes you push could affect others. The way GitHub deals with this is through the use of <strong>branches</strong>.</p>
+<p>Simply put, a branch is a copy of your repository where you can safely make changes/experiment without worrying how these changes might affect others.</p>
+<p>There can be many different branches in your repository, but only one can be deployed: the <code>master</code> branch. So if you are making changes and push them to the <code>master</code> branch then they are immediately implemented.</p>
+<p>We will learn how to <a href="#create-branch">create branches</a> later.</p>
+<p>Below is a schematic overview of the process you go through on GitHub.</p>
+<p><img src="img/github_workflow.png" width="1014" /></p>
+<p>Image adapted from <a href="https://guides.github.com/introduction/flow/">the GitHub guide</a>.</p>
+<p><br />
+</p>
+</div>
+</div>
+<div id="starting-on-github" class="section level2">
+<h2>Starting on GitHub</h2>
+<div id="creating-a-new-repository" class="section level3">
+<h3>Creating a new repository</h3>
+<p>Start a new repository by navigation to the top right corner on GitHub:</p>
+<p><img src="img/new_repo_01.png" width="200" /></p>
+<p>This brings up a screen with the following options:</p>
+<ol style="list-style-type: decimal">
+<li>Name of repository you want to create</li>
+<li>A short description of what the repository contains</li>
+<li>Make the repository Public or Private</li>
+<li>Check the <code>Initialize this repository with a README</code> to create a README file (recommended)</li>
+<li>Create the repository</li>
+</ol>
+<p><img src="img/new_repo_02.png" width="1414" /></p>
+<p><br />
+</p>
+</div>
+<div id="creating-a-new-file" class="section level3">
+<h3>Creating a new file</h3>
+<p>To create a new file, click on the <code>Create new file</code> button:</p>
+<p><img src="img/new_file_01.png" width="819" /></p>
+<p>You then have the possibility to create a new file, in this case we are calling it <code>new_file.txt</code>. Note the use of file extensions.</p>
+<p><img src="img/new_file_02.png" width="813" /></p>
+<p>To add the file you need to add a <strong>commit message</strong>. A commit message should be a brief description of what you’ve done. You can add more information on <em>how</em> you have done things in the commit description.</p>
+<p>Here we are adding it directly to the <code>master</code> branch. We will learn how to create branches next.</p>
+<p><img src="img/new_file_03.png" width="816" /></p>
+<p><br />
+</p>
+</div>
+<div id="create-branch" class="section level3">
+<h3>Creating a new branch</h3>
+<p>You usually create a new branch if you want to add or change something in the <code>master</code> branch, but you’re not entirely sure if it will work or affect others working on the same files. Creating a branch makes a copy of your repository that you can freely edit, without having to worry about these things. We will call this a <code>feature</code> branch.</p>
+<p>To create a feature branch, click on the <code>Branch: master</code> button on the main repository page. This will display a list of branches (if there are any). To add a new branch simply type in the name you want and press <code>Enter</code>.</p>
+<p><img src="img/new_branch_01.png" width="803" /></p>
+<p>This <code>new_branch</code> will be the same as the <code>master</code> branch (because it is an exact copy). To generate some changes, we add a new file called <code>file_in_new_branch.txt</code>. Once committed, we are taken back to the main repository page (note that you are now in <code>Branch: new_branch</code> if you have created a branch called <code>new_branch</code>). Because you have made a copy of your repository and you have made some changes, GitHub now gives you the opportunity to compare your <code>new_branch</code> with the <code>master</code> branch.</p>
+<p>Comparing the branches enables you to generate a <strong>pull request</strong>, which enables you to let people know that you have made changes. This means that people can review the changes and implement them. We will do that next.</p>
+<p><img src="img/new_branch_02.png" width="809" /></p>
+<p><br />
+</p>
+</div>
+<div id="pull-requests" class="section level3">
+<h3>Pull requests</h3>
+<p>To start a pull request, press the <code>Compare &amp; pull request</code> button. This takes you to a screen where you can add a message to whoever is maintaining the <code>master</code> branch, explaining what you have done in your <code>new_branch</code> and requesting to implement the changes.</p>
+<p><img src="img/pull_request_01.png" width="812" /></p>
+<p>After you press the <code>Create pull request</code> button you have the opportunity to merge the two branches. At the bottom of the screen you can write a message to the person who generated the pull request.</p>
+<p><img src="img/pull_request_02.png" width="811" /></p>
+<p><img src="img/pull_request_03.png" width="75%" /></p>
+<p>After you have merged the branches your feature branch becomes obsolete, so you can decide to delete it. Unless you want to make more changes, but it would be best to start a new branch for that again.</p>
+<p><img src="img/pull_request_04.png" width="75%" /></p>
+<p>You are taken back to the main repository page once the pull request is merged with the <code>master</code> branch. You can see the changes have been implemented, because you now have a <code>file_in_new_branch.txt</code> in your <code>master</code> branch.</p>
+<p><img src="img/pull_request_05.png" width="810" /></p>
+<p><br />
+</p>
+</div>
+</div>
+<div id="challenges" class="section level2">
+<h2>Challenges</h2>
+<blockquote>
+<h3 id="challenge-1---new-repository">Challenge 1 - New repository</h3>
+<ol style="list-style-type: decimal">
+<li>Create a new repository on your GitHub account</li>
+<li>Add a new file to the repository</li>
+</ol>
+<p>Remember the following:</p>
+<ul>
+<li>Use a meaningful name for your repository</li>
+<li>Initialise the repository with a README file</li>
+<li>Add an extension to the file name when creating a new file</li>
+</ul>
+</blockquote>
+<p><br />
+</p>
+<blockquote>
+<h3 id="challenge-2---branches">Challenge 2 - Branches</h3>
+<ol style="list-style-type: decimal">
+<li>Create a new branch</li>
+<li>Make some changes to the branch by editting or adding a file</li>
+<li>Commit the changes to the branch</li>
+</ol>
+</blockquote>
+<p><br />
+</p>
+<blockquote>
+<h3 id="challenge-3---pull-requests">Challenge 3 - Pull requests</h3>
+<ol style="list-style-type: decimal">
+<li>Open a pull request</li>
+<li>Review the changes</li>
+<li>Make more changes and push them</li>
+<li>Review the new changes and commit them</li>
+<li>Merge the branch with the <code>master</code> branch</li>
+</ol>
+</blockquote>
+<p><br />
+</p>
+</div>
+<div id="glossary" class="section level2">
+<h2>Glossary</h2>
+<p>The variety of phrases used in both types of version control systems can be a little overwhelming at times. Below is a non-exhaustive list of phrases you might come across. The glossary is an adapted version from <a href="https://linuxacademy.com/blog/linux/git-terms-explained/">here</a>.</p>
+<ul>
+<li><strong>branch</strong> a version of the repository that diverges from the main working project. Used to explore/test new features or make changes.</li>
+<li><strong>clone</strong> a copy of a repository.</li>
+<li><strong>commit</strong> stores the contents of the index (the staging area of Git) in a new commit. Needs to be provided with a commit message that explains what the changes are.</li>
+<li><strong>fetch</strong> downloading and copying the files of a particular branch to your computer.</li>
+<li><strong>fork</strong> creates a personal copy of somebody else’s repository.</li>
+<li><strong>index</strong> working or staging area of Git. This is where files that have been changed/added/deleted are kept until you are ready to commit the files.</li>
+<li><strong>master</strong> the primary branch of all repositories.</li>
+<li><strong>merge</strong> takes the changes from one branch and adds them to another (usually the <code>master</code> branch). These commits are normally first requested via a pull request.</li>
+<li><strong>origin</strong> is the conventional name for the primary version of a repository. Git uses <code>origin</code> as a system alias for pushing and fetching data to and from the primary branch.</li>
+<li><strong>pull</strong> or <strong>pull request</strong> a term used in GitHub to let people know you’ve pushed changes into a branch of the repository. These changes can then be reviewed by the repository maintainer and can be merged.</li>
+<li><strong>push</strong> updates a remote branch with the commits made to the current branch. You are <em>pushing</em> your changes onto the remote.</li>
+<li><strong>remote</strong> a copy of the original branch. When you clone a branch, that new branch is a remote, or <em>clone</em>.</li>
+<li><strong>repository</strong> In many ways, you can think of a Git repository as a directory that stores all the files, folders, and content needed for your project. What it actually is, is the object database of the project, storing everything from the files themselves, to the versions of those files, commits, deletions, et cetera. Repositories are not limited by user, and can be shared and copied.</li>
+<li><strong>upstream</strong> While there is not necessarily a default “upstream” or “downstream” for Git projects, upstream can be considered where you push your Git changes — this is often the master branch of the project within the origin</li>
+</ul>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>(<a href="https://homes.cs.washington.edu/~mernst/advice/version-control.html" class="uri">https://homes.cs.washington.edu/~mernst/advice/version-control.html</a>)<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>(<a href="https://homes.cs.washington.edu/~mernst/advice/version-control.html" class="uri">https://homes.cs.washington.edu/~mernst/advice/version-control.html</a>)<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p><a href="https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F" class="uri">https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F</a><a href="#fnref3" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

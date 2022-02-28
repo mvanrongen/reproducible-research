@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Martin van Rongen" />
+
+
+<title>Data organisation and availability</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link rel="shortcut icon" href="favicon/favicon.ico">
+<link rel="icon" sizes="16x16 32x32 64x64" href="favicon/favicon.ico">
+<link rel="icon" type="image/png" sizes="196x196" href="favicon/favicon-192.png">
+<link rel="icon" type="image/png" sizes="160x160" href="favicon/favicon-160.png">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96.png">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon/favicon-64.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16.png">
+<link rel="apple-touch-icon" href="favicon/favicon-57.png">
+<link rel="apple-touch-icon" sizes="114x114" href="favicon/favicon-114.png">
+<link rel="apple-touch-icon" sizes="72x72" href="favicon/favicon-72.png">
+<link rel="apple-touch-icon" sizes="144x144" href="favicon/favicon-144.png">
+<link rel="apple-touch-icon" sizes="60x60" href="favicon/favicon-60.png">
+<link rel="apple-touch-icon" sizes="120x120" href="favicon/favicon-120.png">
+<link rel="apple-touch-icon" sizes="76x76" href="favicon/favicon-76.png">
+<link rel="apple-touch-icon" sizes="152x152" href="favicon/favicon-152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/favicon-180.png">
+<meta name="msapplication-TileColor" content="#FFFFFF">
+<meta name="msapplication-TileImage" content="favicon/favicon-144.png">
+<meta name="msapplication-config" content="favicon/browserconfig.xml">
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script>
+  $( function() {
+  $( ".accordion" ).accordion({
+      heightStyle: "content",
+      active: false,
+      collapsible: true
+    });
+  } );
+</script>
+
+<script>
+  <!-- search menu pop-up --->
+  $(function() {
+    function slideToggle() {
+      $("#search-box").toggle("slide", 500);
+  };
+  $("#search-icon").on("click", function() {
+  slideToggle();
+  });
+  });
+</script>
+
+
+
+<!-- Motomo analytics -->
+
+
+<script>
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+
+
+<!-- add  Algolia DocSearch -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://carpentries.matomo.cloud/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='https://cdn.matomo.cloud/carpentries.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="index.html">Home</a>
+        </li>
+        <li>
+          <a href="01-organisation_and_availability.html">Data organisation and availability</a>
+        </li>
+        <li>
+          <a href="02-rmarkdown.html">RMarkdown</a>
+        </li>
+        <li>
+          <a href="03-version_control_github.html">Version control and GitHub</a>
+        </li>
+        <li>
+          <a href="04-github.html">GitHub and RStudio</a>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Data organisation and availability</h1>
+<h4 class="author">Martin van Rongen</h4>
+
+</div>
+
+
+<p><br/></p>
+<div id="gettingstarted" class="section level1">
+<h1>Getting started</h1>
+<div id="r" class="section level2">
+<h2>R</h2>
+<p><img src="img/Rlogo.png" width="10%" style="display: block; margin: auto auto auto 0;" /></p>
+<p>R is a statistical programming language widely used in the data science field.</p>
+<p><strong>R provides a record of your analysis</strong></p>
+<p>R uses scripts to record which steps you take during your analysis. Although this might initially take longer to learn than pointing and clicking your way through some other software, it makes it much easier to go back to your analysis in the future and re-do or adjust it, if needed. An added benefit is that it enables you to make comments as to <em>why</em> you’ve done certain steps in your analysis.</p>
+<p><strong>Reproducibility</strong></p>
+<p>It’s the latest buzz-word in science and for good reason! Using R to record every step of your analysis and linking this to the original raw data that you used to do the analysis allows people to reproduce your work. This may very well be your future self!</p>
+<p>This kind of record also enables other people to decide for themselves if the choices you’ve made in the analysis are reasonable and allows them (and yourself) to spot any mistakes.</p>
+<p>For those of you who work in academia there is an added advantage. An increasing number of journals and funding bodies now require you to deposit your raw data and the analysis that led to your conclusions. Knowing how to use R can really be a benefit here.</p>
+<p>Even news agencies, such as the <a href="https://github.com/BBC-Data-Unit">BBC Shared Data Unit</a> now make the underlying analysis of many of their news items available, many of which are performed in R. With the onset of “fake news”, more and more people are expecting transparency!</p>
+</div>
+<div id="rstudio" class="section level2">
+<h2>RStudio</h2>
+<p>When opening RStudio you’re greeted with the following screen (note that this may look different on your computer, depending on your operating system and colour scheme):</p>
+<p><img src="img/rstudio_on_start.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>There are three panels visible at this stage, clock-wise:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Console</strong>. The console can be used to execute code in directly.</li>
+<li><strong>Environment</strong>. This displays all the data that is loaded into R’s memory.</li>
+<li><strong>Files/Plots/Packages/Help/Viewer</strong>. These tabs show the Files in your directory, any Plots you have created, Packages that are installed, a Help function and a Viewer pane that can be used for local web content.</li>
+</ol>
+<p>A bit more about the console. Although it can be useful to execute code directly (in the case of one-off actions, such as the installation of packages) you will want to save your code most of the time so you can share it or refer back to it later. In that case it’s good to start a <strong>script</strong> to write the code in.</p>
+<p>To start a new script go to <code>File -&gt; New File -&gt; R Script</code>. Your new screen will look something like this, with a new panel appearing in the top right corner:</p>
+<p><img src="img/rstudio_all_panels.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="data-organisation" class="section level2">
+<h2>Data organisation</h2>
+<div id="working-directory" class="section level3">
+<h3>Working directory</h3>
+<p>You might have noticed that the bottom right panel contains five different tabs, one of which is called <code>Files</code>. In our example it shows the current <strong>working directory</strong>. The concept of a working directory is very important one. When we’re working on a project, it is good practice to keep all the data, scripts, images and any other files contained in a single folder. This single folder we call the working directory and it allows us to use <strong>relative paths</strong> in scripts as opposed to <strong>absolute paths</strong>.</p>
+<blockquote>
+<p><strong>Relative path</strong>: data/raw/gapminder.csv</p>
+<p><strong>Absolute path</strong>: C:/Users/Admin/Documents/R/Projects/2020_example/<strong>data/raw/gapminder.csv</strong></p>
+</blockquote>
+<p>The beauty of using relative paths is that you can move the working directory folder to any location you like and all the references and links in the scripts will continue to work. Hard coding absolute paths is always a bad idea because it makes it much harder to share your code because it is all linked to a specific directory on <em>your</em> computer.</p>
+</div>
+<div id="directory-structure" class="section level3">
+<h3>Directory structure</h3>
+<p>Apart from using a working directory it also pays off to think about how to organise your files within it. In this example the working directory is called <code>2020_example</code> and it contains several other directories to organise our files:</p>
+<p><img src="img/working_directory.png" width="100%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>the <strong><code>data</code></strong> folder contains a <code>raw</code> and <code>processed</code> sub-folder. This is often a good idea, because you want to make sure you never overwrite your original, raw data. Any analyses can always be repeated (save your script!) and the output of them can go into the <code>processed</code> data folder.</li>
+<li>the <strong><code>documents</code></strong> folder contains documents that are relevant to the project.</li>
+<li>the <strong><code>figures</code></strong> folder can contain sub-folders to separate quick exploratory plots and publication-quaility figures.</li>
+<li>the <strong><code>notebooks</code></strong> folder can contain your R Markdown files in which you explore your data in detail.</li>
+<li>a <strong><code>scripts</code></strong> folder contains all the scripts used in the final analyses. It often helps to order them and name them consistently, such as <code>01-read_data.R</code>, <code>02-clean_data.R</code>, <code>03-exploratory_analysis.R</code> etc. It’ll save you a lot of headache when trying to find things back in the future!</li>
+</ul>
+<p>The working directory also contains a file named <code>2020_example.Rproj</code>. This is a file that is created by RStudio and when you open that it automatically opens RStudio in a new session and sets the working directory to where this <code>Rproj</code> file is located. Useful! To create your own R project, go to <code>File -&gt; New Project</code>.</p>
+<blockquote>
+<p><strong>Note</strong>: You can <strong>create new directories</strong> by clicking on the <code>New Folder</code> button or by creating them directly in your file browser.</p>
+<p>It is good practice to <strong>avoid any spaces</strong> in your directory names because these names can create issues when used in code. Instead, you can use the underscore.</p>
+<p>R is also case-sensitive, so <strong>be consistent in your use of uppercase and lowercase</strong>. I personally use lowercase exclusively because it’s one less thing to think about!</p>
+</blockquote>
+</div>
+</div>
+<div id="data-availability" class="section level2">
+<h2>Data availability</h2>
+<p>Making your data reproducible also involves thinking about where to store your data. We will look more closely into <a href="https://github.com">GitHub</a> later, but for now it’s suffice to say that you can use GitHub to easily share your analyses, which can also include the data itself.</p>
+<p>Below is an example of a data set that is available on the GitHub repository for this course.</p>
+<p><img src="img/data_availability_github.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>This works well if your data sets are not too large, but depending on your research you might soon find it becomes limiting. There are online repositories for all kinds of data, such as <a href="https://www.ncbi.nlm.nih.gov/genbank/">GenBank</a> for genetic sequences, <a href="https://www.ebi.ac.uk/ena">ENA</a> for various sequencing information etc.</p>
+<p>These repositories keep your data available and provide a fixed, unique URL to your data that you can use within your scripts.</p>
+<p>When publishing your research journals will usually require a link to all the data. If you’re a researcher at Cambridge University you can use <a href="https://www.repository.cam.ac.uk">Apollo</a>. This is the University’s online repository and takes all kind of types of data, enabling you to keep all your data in one place.</p>
+<p><img src="img/data_availability_apollo.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>There are plenty more repositories to choose from and the main things to keep in mind are accessibility and stability. Can people access your data freely and are the data likely be in the same place in 10 years time?</p>
+</div>
+<div id="data-exploration-workflow" class="section level2">
+<h2>Data exploration workflow</h2>
+<p>Some might have completed the <a href="https://www.training.cam.ac.uk/bioinformatics/event/3338957">Introduction to R for Biologists</a> course at the University. If so, you will have come across the concept of data exploration workflow.</p>
+<p>When you are working on a project that requires data analysis, you will normally need to perform the following steps:</p>
+<p><img src="img/data_science_explore.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>More information on this workflow can be found in the <a href="https://r4ds.had.co.nz/">R for Data Science</a> book. Let’s briefly go over each step:</p>
+<ol style="list-style-type: decimal">
+<li>The first step in working with data is to first <strong>import</strong> your data into R. This connects the external file/database to your project in R.</li>
+<li><strong>Cleaning</strong> or <strong>tidying</strong> the data will follow, which involves making sure that the data is consistent and that each row in the dataset is an observation and each column is a variable.<br />
+<em>e.g.</em> In the <code>gapminder</code> data set the <code>country</code> column specifies the country, using a capital letter at the start. A common problem in data sets is inconsistent capitalisation. For example, here <em>Austria</em> would be different to <em>austria</em>, since R is case-sensitive. During the <em>tidying</em> stage it is important to make the dataset consistent and much as possible so that you can focus on the questions you are trying to solve in your analysis.<br />
+</li>
+<li>Once the dataset is tidy, we move to the transformation stage. To be able to <strong>transform</strong> your data you need to plan in advance what analyses you would like to perform on the dataset and what plots you would like to create. In this way, you are able to plan ahead what variables/columns you will be using from the dataset, what additional variables you will need to create and what variables you will not be using so that you can keep only the columns in the dataset that are relevant for your analyses. By the end of the transformation process you will have a dataset that is focused for your analyses and you can move on to the main exploratory mechanisms of this workflow which are visualisation and modelling. These two stages complement each other and when exploring your data you normally repeat these two stages several times.<br />
+</li>
+<li><strong>Visualising</strong> data is a powerful way to explore your data. Furthermore it helps you understand if there is any pattern in the data.<br />
+</li>
+<li><strong>Modelling</strong> the data involves applying statistics or other mathematical or computational models on your data to explore if there are correlations or patterns in the dataset to help you answer the scientific question you are trying to solve.<br />
+</li>
+<li>The last step in the data exploration workflow is to <strong>communicate</strong> your results. This is very important as you will need to be able to communicate your results to others to have a successful project.</li>
+</ol>
+<p>All these stages in the data exploration workflow can be achieved by programming in R. In this course we will focus on the <strong>communicate</strong> aspect of the workflow. And for that we need to turn to <a href="https://rmarkdown.rstudio.com">RMarkdown</a>.</p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
