@@ -1,15 +1,8 @@
 ---
 title: "Reproducible Research using R"
 author: "Martin van Rongen"
-date: "26 May - 13 June 2020"
 toc: hide
 ---
-
-<br/>
-
-**Instructor:** Martin van Rongen
-
-<br/>
 
 ### Description
 
